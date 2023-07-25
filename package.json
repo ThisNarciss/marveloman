@@ -1,0 +1,22 @@
+{
+  "name": "marveloman",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.64.1",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "md5": "^2.3.0",
+    "modern-normalize": "^2.0.0",
+    "notiflix": "^3.2.6"
+  }
+}
