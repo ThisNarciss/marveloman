@@ -1,4 +1,12 @@
-@import '~node_modules/modern-normalize/modern-normalize.css';
+@import 'modern-normalize/modern-normalize.css';
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fafafa;
+  background-color: #0c0b0b;
+}
 
 a {
   color: inherit;
