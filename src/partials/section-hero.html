@@ -1,9 +1,9 @@
-<section class="section">
-  <div class="container">
-    <div>
-      <p>Web-based platform</p>
-      <h1>Marvelous Adventures</h1>
-      <p>
+<section class="section-hero">
+  <div class="container hero-container">
+    <div class="hero_text-box">
+      <p class="hero_text">Web-based platform</p>
+      <h1 class="hero_label">Marvelous Adventures</h1>
+      <p class="hero_description">
         is a web-based platform that provides an immersive
         experience for users to explore and discover a vast
         collection of Marvel characters and comics. Start
@@ -11,27 +11,49 @@
         our Characters and Comics sections and discover your
         new favorites today.
       </p>
-      <a href="./comics.html">All comics</a>
+      <a class="hero_link" href="./comics.html"
+        >All comics</a
+      >
     </div>
-    <ul>
-      <li><button type="button"></button></li>
-      <li><button type="button"></button></li>
-      <li><button type="button"></button></li>
+    <ul class="hero_btn-list">
+      <li class="hero_btn-item">
+        <button
+          class="hero_btn active"
+          type="button"
+        ></button>
+      </li>
+      <li class="hero_btn-item">
+        <button class="hero_btn" type="button"></button>
+      </li>
+      <li class="hero_btn-item">
+        <button class="hero_btn" type="button"></button>
+      </li>
     </ul>
-    <div>
+    <div class="hero_pictures-box">
       <img
+        class="character_img"
         src="./src/images/desktop-black-panter1@1x.jpg"
         alt="black panther"
-      /><img
-        src="./src/images/desktop-black-panter2@1x.jpg"
-        alt="black panther"
+        width="352"
+        height="540"
       />
-      <h3>Characters</h3>
-      <p>
-        T’Challa is the king of the secretive and highly
-        advanced African nation of Wakanda - as well as the
-        powerful warrior known as the Black Panther.
-      </p>
+      <div class="character_box">
+        <img
+          class="character_img"
+          src="./src/images/desktop-black-panter2@1x.jpg"
+          alt="black panther"
+          width="352"
+          height="540"
+        />
+        <div class="character_text-box">
+          <h3 class="character_title">Characters</h3>
+          <p class="character_text">
+            T’Challa is the king of the secretive and highly
+            advanced African nation of Wakanda - as well as
+            the powerful warrior known as the Black Panther.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

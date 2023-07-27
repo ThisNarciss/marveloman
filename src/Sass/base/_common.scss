@@ -2,10 +2,10 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #fafafa;
-  background-color: #0c0b0b;
+  font-size: var(--base-font-size);
+  font-weight: var(--base-font-weight);
+  color: var(--default-text-color);
+  background-color: var(--default-bg-color);
 }
 
 a {
@@ -27,7 +27,7 @@ p {
   margin: 0;
 }
 
-image {
+img {
   display: block;
   max-width: 100%;
   height: auto;

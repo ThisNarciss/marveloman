@@ -1,0 +1,47 @@
+.footer {
+  background-color: var(--default-bg-color);
+}
+
+.footer_list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 64px;
+}
+
+.footer_list_item_link {
+  font-size: 16px;
+  line-height: 1.13;
+  color: var(--default-text-color);
+}
+
+.social-links_list {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.social-links_list_item {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid rgba(250, 250, 250, 0.15);
+}
+.social-links_list_item_link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.policy_box {
+  text-align: center;
+  padding: 18px 0;
+  background-color: var(--second-bg-color);
+}
+
+.policy_text {
+  line-height: 1.29;
+  letter-spacing: 0.28px;
+  color: rgba(250, 250, 250, 0.4);
+}
