@@ -1,1 +1,14 @@
+@import './Sass/utils/variables';
+@import './Sass/utils/visually-hidden';
+@import './Sass/utils/mixin';
 @import './Sass/base/common';
+@import './Sass/base/container';
+@import './Sass/base/section';
+@import './Sass/layout/header';
+@import './Sass/layout/section-hero';
+@import './Sass/layout/section-last-comics';
+@import './Sass/layout/section-comics-hero';
+@import './Sass/layout/section-filter';
+@import './Sass/layout/section-result-search';
+@import './Sass/layout/footer';
+@import './Sass/layout/modal';
