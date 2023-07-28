@@ -3,10 +3,7 @@
   top: 0;
   padding: 24px 0;
   z-index: 99;
-}
-
-.bg-opacity {
-  background-color: var(--default-bg-color);
+  transition: background-color var(--animation);
 }
 
 .site-nav {
