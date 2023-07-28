@@ -19,13 +19,6 @@ function slider() {
   const slidesCharacter = sliderCharacter?.querySelectorAll(
     '.character_slide'
   ) as NodeListOf<HTMLDivElement>;
-  const pantherBtn = document.querySelector(
-    '.hero_btn-panther'
-  ) as HTMLButtonElement;
-  const hulkBtn = document.querySelector('.hero_btn-hulk') as HTMLButtonElement;
-  const spiderBtn = document.querySelector(
-    '.hero_btn-spider'
-  ) as HTMLButtonElement;
   const allComicsRef = document.querySelector('.hero_link') as HTMLLinkElement;
 
   const sliderBtn = document.querySelectorAll(
