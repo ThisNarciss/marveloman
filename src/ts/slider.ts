@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', slider);
 
+const btnColor = ['#34387f', '#5b7f3c', '#600404'];
+
 function slider() {
   const sliderImg = document.querySelector('.hero_img-box') as HTMLDivElement;
   const sliderCharacter = document.querySelector(
@@ -17,14 +19,11 @@ function slider() {
   const slidesCharacter = sliderCharacter?.querySelectorAll(
     '.character_slide'
   ) as NodeListOf<HTMLDivElement>;
-  const pantherBtn = document.querySelector(
-    '.hero_btn-panther'
-  ) as HTMLButtonElement;
-  const hulkBtn = document.querySelector('.hero_btn-hulk') as HTMLButtonElement;
-  const spiderBtn = document.querySelector(
-    '.hero_btn-spider'
-  ) as HTMLButtonElement;
   const allComicsRef = document.querySelector('.hero_link') as HTMLLinkElement;
+
+  const sliderBtn = document.querySelectorAll(
+    '.hero_btn'
+  ) as NodeListOf<HTMLButtonElement>;
 
   const slidesImgHeight = slidesImg[0].offsetHeight;
   const slidesCharacterHeight = slidesCharacter[0].offsetHeight;
@@ -43,29 +42,29 @@ function slider() {
     const transYValue = -slidesCharacterHeight * index;
     slidesCharacterContainer.style.transform = `translateY(${transYValue}px)`;
   };
-  pantherBtn.addEventListener('click', () => {
-    toSlideImg(0);
-    toSlideCharacter(0);
-    pantherBtn.style.backgroundColor = '#34387f';
-    hulkBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
-    spiderBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
-    allComicsRef.style.backgroundColor = '#34387f';
-  });
-  hulkBtn.addEventListener('click', () => {
-    toSlideImg(1);
-    toSlideCharacter(1);
-    pantherBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
-    hulkBtn.style.backgroundColor = '#5b7f3c';
-    spiderBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
-    allComicsRef.style.backgroundColor = '#5b7f3c';
-  });
-  spiderBtn.addEventListener('click', () => {
-    toSlideImg(2);
-    toSlideCharacter(2);
-    pantherBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
-    hulkBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
-    spiderBtn.style.backgroundColor = '#600404';
-    allComicsRef.style.backgroundColor = '#600404';
+
+  let previousBtn: null | HTMLButtonElement = null;
+
+  sliderBtn.forEach((btn, idx) => {
+    if (idx === 0) {
+      previousBtn = btn;
+      btn.style.backgroundColor = btnColor[idx];
+    }
+    btn.addEventListener('click', () => {
+      if (previousBtn !== null) {
+        previousBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
+      }
+      toSlideImg(idx);
+      toSlideCharacter(idx);
+      btn.style.backgroundColor = btnColor[idx];
+      allComicsRef.style.backgroundColor = btnColor[idx];
+
+      previousBtn = btn;
+
+      if (!btnColor[idx]) {
+        btn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
+      }
+    });
   });
   // let indexCount = 0;
   // const idx = setInterval(() => {
@@ -74,6 +73,7 @@ function slider() {
   //   }
   //   toSlideImg(indexCount);
   //   toSlideCharacter(indexCount);
+
   //   indexCount += 1;
-  // }, 1000);
+  // }, 3000);
 }
