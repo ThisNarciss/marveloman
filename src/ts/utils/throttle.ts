@@ -3,9 +3,11 @@ type ThrottleOptions = {
   trailing?: boolean;
 };
 
-export function throttle<
-  T extends (...args: any[]) => void
->(func: T, wait: number, options: ThrottleOptions = {}): T {
+export function throttle<T extends (...args: any[]) => void>(
+  func: T,
+  wait: number,
+  options: ThrottleOptions = {}
+): T {
   let timeout: ReturnType<typeof setTimeout> | null;
   let previous = 0;
 

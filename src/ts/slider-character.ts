@@ -1,8 +1,10 @@
-document.addEventListener('DOMContentLoaded', slider);
+import { toSlide } from './utils/slider';
+
+document.addEventListener('DOMContentLoaded', sliderHeroCharacterImg);
 
 const btnColor = ['#34387f', '#5b7f3c', '#600404'];
 
-function slider() {
+function sliderHeroCharacterImg() {
   const sliderImg = document.querySelector('.hero_img-box') as HTMLDivElement;
   const sliderCharacter = document.querySelector(
     '.character_box'
@@ -30,19 +32,6 @@ function slider() {
   const slidesImgCount = slidesImg.length;
   const slidesCharacterCount = slidesCharacter.length;
 
-  const toSlideImg = (index: number) => {
-    if (index < 0 || index >= slidesImgCount) return;
-
-    const transYValue = -slidesImgHeight * index;
-    slidesImgContainer.style.transform = `translateY(${transYValue}px)`;
-  };
-  const toSlideCharacter = (index: number) => {
-    if (index < 0 || index >= slidesCharacterCount) return;
-
-    const transYValue = -slidesCharacterHeight * index;
-    slidesCharacterContainer.style.transform = `translateY(${transYValue}px)`;
-  };
-
   let previousBtn: null | HTMLButtonElement = null;
 
   sliderBtn.forEach((btn, idx) => {
@@ -54,8 +43,20 @@ function slider() {
       if (previousBtn !== null) {
         previousBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
       }
-      toSlideImg(idx);
-      toSlideCharacter(idx);
+      toSlide(
+        idx,
+        slidesImgCount,
+        slidesImgHeight,
+        slidesImgContainer,
+        'translateY'
+      );
+      toSlide(
+        idx,
+        slidesCharacterCount,
+        slidesCharacterHeight,
+        slidesCharacterContainer,
+        'translateY'
+      );
       btn.style.backgroundColor = btnColor[idx];
       allComicsRef.style.backgroundColor = btnColor[idx];
 
@@ -66,14 +67,4 @@ function slider() {
       }
     });
   });
-  // let indexCount = 0;
-  // const idx = setInterval(() => {
-  //   if (indexCount < 0 || indexCount >= 3) {
-  //     indexCount = 0;
-  //   }
-  //   toSlideImg(indexCount);
-  //   toSlideCharacter(indexCount);
-
-  //   indexCount += 1;
-  // }, 3000);
 }

@@ -1,2 +1,4 @@
+import './ts/api/fetchingComics';
 import './ts/change-header-bg';
-import './ts/slider';
+import './ts/slider-character';
+import './ts/slider-last-comics';
