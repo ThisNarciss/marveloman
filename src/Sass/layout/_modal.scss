@@ -1,0 +1,46 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  overflow: auto;
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(128, 128, 128, 0.2);
+
+  transition: opacity var(--animation), visibility var(--animation);
+}
+
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  transition: transform var(--animation);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 842px;
+  overflow: auto;
+  padding: 64px 32px;
+  border-radius: 8px;
+  background-color: var(--default-bg-color);
+}
+
+.is-hidden.modal {
+  transform: scale(1.1);
+}
+
+.modal-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+}
