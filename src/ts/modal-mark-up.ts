@@ -27,9 +27,11 @@ interface IData {
 export function modalMarkUp(data: IData) {
   const { results } = data;
   modalBoxRef.innerHTML = '';
+
   const price = results[0].prices.find(
     item => item.type === 'printPrice'
   )?.price;
+
   const date = results[0].dates
     .find(item => item.type === 'focDate')
     ?.date.slice(0, 4);

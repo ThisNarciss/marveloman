@@ -74,7 +74,6 @@ export const getOneComics = async (id: string) => {
     dates,
     prices,
   }: Item = comicData.results[0];
-  console.log(comicData.results[0]);
 
   const {
     data: { data: characterData },
@@ -110,7 +109,6 @@ export const getOneComics = async (id: string) => {
     creatorsInfo: { fullName, avatar },
     charactersInfo,
   };
-  console.log(oneComicData);
 
   return { results: [oneComicData] };
 };
