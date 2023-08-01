@@ -1,5 +1,6 @@
 .section-hero {
   padding: 40px 0;
+  height: auto;
 }
 
 .hero-container {
@@ -67,7 +68,6 @@
 .hero_pictures-box {
   display: flex;
   align-items: center;
-  height: 540px;
 }
 .hero_img-box {
   position: relative;
@@ -86,9 +86,10 @@
 .character_box {
   position: relative;
   left: 32px;
-  bottom: 130px;
+  bottom: 40px;
   height: 626px;
   overflow: hidden;
+  margin-bottom: 130px;
 }
 
 .character_text-box {
@@ -102,7 +103,8 @@
 .character_title {
   color: var(--default-text-color);
   font-size: 12px;
-  line-height: 1.17; /* 116.667% */
+  line-height: 1.17;
+  font-weight: 400;
   letter-spacing: -0.24px;
 }
 

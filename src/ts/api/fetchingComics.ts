@@ -2,6 +2,7 @@ import axios from 'axios';
 import md5 from 'md5';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { createLastComicsMurkUp } from '../comics-last-week-mark-up';
+import { Notify } from 'notiflix';
 
 type Item = {
   title: string;
@@ -42,88 +43,105 @@ Loading.init({
 axios.defaults.baseURL = 'https://gateway.marvel.com/v1/public';
 
 const getComicsLastWeek = async () => {
-  Loading.circle();
-  const {
-    data: { data },
-  } = await axios.get(
-    `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&dateDescriptor=lastWeek&limit=6`
-  );
-  createLastComicsMurkUp(data);
-  return data;
+  try {
+    Loading.circle();
+    const {
+      data: { data },
+    } = await axios.get(
+      `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&dateDescriptor=lastWeek&limit=6`
+    );
+    createLastComicsMurkUp(data);
+    return data;
+  } catch (error: any) {
+    return error.message;
+  }
 };
 
 if (location.pathname === '/index.html') {
-  getComicsLastWeek();
+  getComicsLastWeek().catch(error => Notify.failure(error));
 }
 
 export const getOneComics = async (id: string) => {
-  Loading.circle();
-  const {
-    data: { data: comicData },
-  } = await axios.get(
-    `/comics/${id}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
-  );
+  try {
+    Loading.circle();
+    const {
+      data: { data: comicData },
+    } = await axios.get(
+      `/comics/${id}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+    );
 
-  const {
-    characters,
-    creators,
-    title,
-    description,
-    thumbnail,
-    pageCount,
-    format,
-    images,
-    dates,
-    prices,
-  }: Item = comicData.results[0];
+    const {
+      characters,
+      creators,
+      title,
+      description,
+      thumbnail,
+      pageCount,
+      format,
+      images,
+      dates,
+      prices,
+    }: Item = comicData.results[0];
 
-  const {
-    data: { data: characterData },
-  } = await axios.get(
-    `${characters.collectionURI}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
-  );
+    const {
+      data: { data: characterData },
+    } = await axios.get(
+      `${characters.collectionURI}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+    );
 
-  const writer = creators.items.find(
-    creator => creator.role === 'writer' || 'editor'
-  );
+    const writer = creators.items.find(
+      creator => creator.role === 'writer' || 'editor'
+    );
 
-  const {
-    data: { data: creatorData },
-  } = await axios.get(
-    `${writer?.resourceURI}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
-  );
+    const {
+      data: { data: creatorData },
+    } = await axios.get(
+      `${writer?.resourceURI}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+    );
 
-  const { fullName, thumbnail: avatar } = creatorData.results[0];
-  const charactersInfo = characterData.results.map(
-    ({ name, id, thumbnail }: CharacterItem) => {
-      return { name, id, thumbnail };
-    }
-  );
-  const oneComicData = {
-    title,
-    description: description ?? '',
-    thumbnail,
-    pageCount,
-    format,
-    images,
-    dates,
-    prices,
-    creatorsInfo: { fullName, avatar },
-    charactersInfo,
-  };
+    const { fullName, thumbnail: avatar } = creatorData.results[0];
+    const charactersInfo = characterData.results.map(
+      ({ name, id, thumbnail }: CharacterItem) => {
+        return { name, id, thumbnail };
+      }
+    );
+    const oneComicData = {
+      title,
+      description: description ?? '',
+      thumbnail,
+      pageCount,
+      format,
+      images,
+      dates,
+      prices,
+      creatorsInfo: { fullName, avatar },
+      charactersInfo,
+    };
 
-  return { results: [oneComicData] };
+    const data = { results: [oneComicData] };
+
+    return data;
+  } catch (error: any) {
+    return error.message;
+  }
 };
 
 export const searchComics = async (str: string) => {
-  if (str === '') {
-    return [];
-  }
-  const {
-    data: { data },
-  } = await axios.get(
-    `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${str}`
-  );
+  try {
+    if (str === '') {
+      return [];
+    }
+    const {
+      data: { data },
+    } = await axios.get(
+      `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${str}`
+    );
 
-  return data.results.map((item: Item) => item.title);
+    const searchTitle = data.results.map(
+      (item: Item) => item.title
+    ) as string[];
+    return searchTitle;
+  } catch (error: any) {
+    return error.message;
+  }
 };

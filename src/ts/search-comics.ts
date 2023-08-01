@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix';
 import { searchComics } from './api/fetchingComics';
 import { dropdownMarkUp } from './dropdown-mark-up';
 
@@ -9,9 +10,11 @@ searchForm.addEventListener('submit', handleSubmit);
 
 function handleSearch(e: Event) {
   const { value } = e.currentTarget as HTMLInputElement;
-  searchComics(value.trim()).then(data => {
-    dropdownMarkUp(data);
-  });
+  searchComics(value.trim())
+    .then(data => {
+      dropdownMarkUp(data);
+    })
+    .catch(error => Notify.failure(error));
 }
 
 function handleSubmit(e: Event) {
