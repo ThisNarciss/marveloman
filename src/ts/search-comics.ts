@@ -26,6 +26,6 @@ function handleSubmit(e: Event) {
   localStorage.setItem('searchComic', value);
 
   if (location.pathname === '/index.html' && value) {
-    location.assign('/comics.html');
+    location.assign('./comics.html');
   }
 }

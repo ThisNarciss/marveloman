@@ -57,7 +57,7 @@ const getComicsLastWeek = async () => {
   }
 };
 
-if (location.pathname !== '/comics.html') {
+if (location.pathname !== './comics.html') {
   console.log(location);
 
   getComicsLastWeek().catch(error => Notify.failure(error));
@@ -120,9 +120,7 @@ export const getOneComics = async (id: string) => {
       charactersInfo,
     };
 
-    const data = { results: [oneComicData] };
-
-    return data;
+    return { results: [oneComicData] };
   } catch (error: any) {
     return error.message;
   }
