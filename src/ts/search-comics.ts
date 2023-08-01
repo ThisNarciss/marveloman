@@ -25,7 +25,7 @@ function handleSubmit(e: Event) {
   const value: string = inputElement.value.trim();
   localStorage.setItem('searchComic', value);
 
-  if (location.pathname === '/index.html' && value) {
+  if (location.pathname === '/' && value) {
     location.assign('./comics.html');
   }
 }
