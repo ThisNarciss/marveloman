@@ -57,7 +57,7 @@ const getComicsLastWeek = async () => {
   }
 };
 
-if (location.pathname === '/index.html') {
+if (location.pathname !== '/comics.html') {
   getComicsLastWeek().catch(error => Notify.failure(error));
 }
 
