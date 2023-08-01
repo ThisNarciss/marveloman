@@ -52,10 +52,12 @@ const getComicsLastWeek = async () => {
   return data;
 };
 
-getComicsLastWeek();
+if (location.pathname === '/index.html') {
+  getComicsLastWeek();
+}
 
 export const getOneComics = async (id: string) => {
-  // Loading.circle();
+  Loading.circle();
   const {
     data: { data: comicData },
   } = await axios.get(
@@ -111,4 +113,17 @@ export const getOneComics = async (id: string) => {
   };
 
   return { results: [oneComicData] };
+};
+
+export const searchComics = async (str: string) => {
+  if (str === '') {
+    return [];
+  }
+  const {
+    data: { data },
+  } = await axios.get(
+    `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${str}`
+  );
+
+  return data.results.map((item: Item) => item.title);
 };

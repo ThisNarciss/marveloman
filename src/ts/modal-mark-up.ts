@@ -1,3 +1,5 @@
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+
 const modalBoxRef = document.querySelector('.modal_box') as HTMLDivElement;
 
 type Item = {
@@ -26,49 +28,67 @@ interface IData {
 
 export function modalMarkUp(data: IData) {
   const { results } = data;
+  const comic = results[0];
   modalBoxRef.innerHTML = '';
 
-  const price = results[0].prices.find(
-    item => item.type === 'printPrice'
-  )?.price;
+  const price = comic.prices.find(item => item.type === 'printPrice')?.price;
 
-  const date = results[0].dates
+  const date = comic.dates
     .find(item => item.type === 'focDate')
     ?.date.slice(0, 4);
 
-  const murkUp = results
+  const gallery = comic.images
     .map(
-      item => `<div class="comics_images_box">
-        <img
-          class="comics_cover"
-          src="${item.thumbnail.path}/portrait_uncanny.${
-        item.thumbnail.extension
-      }"
-          alt="comics cover"
-          width="332"
-          height="445"
-        />
-        ${
-          item.images.length > 1
-            ? `<ul class='gallery_list'>${item.images
-                .map(
-                  img => `<li class="gallery_item"><img
+      img => `<li class="gallery_item"><img
           class="gallery_img"
           src="${img.path}/portrait_uncanny.${img.extension}"
           alt="comics cover"
           width="100"
           height="150"
+          loading="lazy"
         />
           </li>`
-                )
-                .join('')}</ul>`
+    )
+    .join('');
+
+  const characters = comic.charactersInfo
+    .map(
+      char =>
+        `<li id="${char.id}" class='characters_item'><img src="${
+          char.thumbnail.path
+        }/portrait_medium.${
+          char.thumbnail.extension
+        }" alt="creator avatar" class="creator_avatar" loading="lazy" width="60"
+          height="60"/><h3 class="characters_name">${char.name.slice(
+            0,
+            char.name.indexOf('(')
+          )}</h3></li>`
+    )
+    .join('');
+
+  const murkUp = `<div class="comics_images_box">
+        <img
+          class="comics_cover"
+          src="${comic.thumbnail.path}/portrait_uncanny.${
+    comic.thumbnail.extension
+  }"
+          alt="comics cover"
+          loading="lazy"
+          width="332"
+          height="445"
+        />
+        ${
+          comic.images.length > 1
+            ? `<ul class='gallery_list'>${gallery}</ul>`
             : ''
         }
       </div>
       <div class="description_box">
         <div class="text_box">
-          <h2 class="description_title">${item.title}</h2>
-          <p class="description_text">${item.description}</p>
+          <h2 class="description_title">${comic.title}</h2>
+          <p class="description_text">${
+            comic.description || 'No description info'
+          }</p>
         </div>
         <table class="description_table">
         <thead class="description_table_header">
@@ -81,9 +101,9 @@ export function modalMarkUp(data: IData) {
         </thead>
         <tbody>
         <tr class="description_table_row">
-          <td class="description_table_data">${item.format}</td>
+          <td class="description_table_data">${comic.format}</td>
           <td class="description_table_data">${date}</td>
-          <td class="description_table_data">${item.pageCount}</td>
+          <td class="description_table_data">${comic.pageCount}</td>
           <td class="description_table_data">$${price}</td>
         </tr>
         </tbody>
@@ -91,37 +111,25 @@ export function modalMarkUp(data: IData) {
         <div class="creator_box">
           <h2 class="description_title">Creator</h2>
           <div class="creator_content"><img src="${
-            item.creatorsInfo.avatar.path
+            comic.creatorsInfo.avatar.path
           }/portrait_medium.${
-        item.creatorsInfo.avatar.extension
-      }" alt="creator avatar" class="creator_avatar" width='60' height='60'/>
+    comic.creatorsInfo.avatar.extension
+  }" alt="creator avatar" class="creator_avatar" width='60' height='60' loading="lazy"/>
           <div class="creator-info_box">
             <p class="creator_text">Writer</p>
-            <h3 class="creator_name">${item.creatorsInfo.fullName}</h3>
+            <h3 class="creator_name">${comic.creatorsInfo.fullName}</h3>
           </div></div>
           
         </div>
         <div class="characters box">
           <h2 class="description_title">Characters</h2>${
-            item.charactersInfo.length > 0
-              ? `<ul class="characters_list">${item.charactersInfo
-                  .map(
-                    char =>
-                      `<li id="${char.id}" class='characters_item'><img src="${
-                        char.thumbnail.path
-                      }/portrait_medium.${
-                        char.thumbnail.extension
-                      }" alt="creator avatar" class="creator_avatar" /><h3 class="characters_name">${char.name.slice(
-                        0,
-                        char.name.indexOf('(')
-                      )}</h3></li>`
-                  )
-                  .join('')}</ul>`
-              : ''
+            comic.charactersInfo.length > 0
+              ? `<ul class="characters_list">${characters}</ul>`
+              : '<p class="description_text"> No characters info</p>'
           }
         </div>
-      </div>`
-    )
-    .join('');
+      </div>`;
+
   modalBoxRef.insertAdjacentHTML('beforeend', murkUp);
+  Loading.remove();
 }
