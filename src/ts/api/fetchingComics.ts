@@ -3,6 +3,7 @@ import md5 from 'md5';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { createLastComicsMurkUp } from '../comics-last-week-mark-up';
 import { Notify } from 'notiflix';
+import { urlChange } from '../utils/urlChange';
 
 type Item = {
   title: string;
@@ -11,12 +12,11 @@ type Item = {
   description: string;
   format: string;
   creators: {
-    items:
-      | {
-          name: string;
-          resourceURI: string;
-          role: string;
-        }[];
+    items: {
+      name: string;
+      resourceURI: string;
+      role: string;
+    }[];
   };
   characters: { collectionURI: string };
   images: { path: string; extension: string }[];
@@ -30,7 +30,8 @@ type CharacterItem = {
   id: number;
 };
 const TIME_STAMP = Date.now();
-const { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY } = import.meta.env;
+const { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY, VITE_BASE_API_URL } = import.meta
+  .env;
 
 const hash = md5(TIME_STAMP + VITE_PRIVATE_KEY + VITE_PUBLIC_KEY);
 
@@ -40,7 +41,7 @@ Loading.init({
   backgroundColor: 'rgba(0, 0, 0, 0.3)',
 });
 
-axios.defaults.baseURL = 'https://gateway.marvel.com/v1/public';
+axios.defaults.baseURL = VITE_BASE_API_URL;
 
 const getComicsLastWeek = async () => {
   try {
@@ -86,7 +87,10 @@ export const getOneComics = async (id: string) => {
     const {
       data: { data: characterData },
     } = await axios.get(
-      `${characters.collectionURI}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+      `${urlChange(
+        characters.collectionURI,
+        'comics'
+      )}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
     );
 
     const writer = creators.items.find(
@@ -96,7 +100,10 @@ export const getOneComics = async (id: string) => {
     const {
       data: { data: creatorData },
     } = await axios.get(
-      `${writer?.resourceURI}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+      `${urlChange(
+        writer?.resourceURI,
+        'creators'
+      )}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
     );
 
     const { fullName, thumbnail: avatar } = creatorData.results[0];

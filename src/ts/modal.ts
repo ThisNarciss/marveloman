@@ -1,4 +1,4 @@
-import { Notify } from 'notiflix';
+import { Loading, Notify } from 'notiflix';
 import { getOneComics } from './api/fetchingComics';
 import { modalMarkUp } from './modal-mark-up';
 
@@ -21,7 +21,10 @@ function onOpenModal(e: MouseEvent) {
       modal.classList.remove('is-hidden');
       document.body.style.overflow = 'hidden';
     })
-    .catch(error => Notify.failure(error));
+    .catch(error => {
+      Notify.failure(error);
+      Loading.remove();
+    });
 }
 
 function oncloseModal() {
