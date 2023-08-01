@@ -23,8 +23,9 @@ function handleSubmit(e: Event) {
   const inputElement = form.elements.namedItem('fav') as HTMLInputElement;
 
   const value: string = inputElement.value.trim();
-  localStorage.setItem('searchComic', value);
-
+  if (value) {
+    localStorage.setItem('searchComic', value);
+  }
   if (location.pathname === '/' && value) {
     location.assign('./comics.html');
   }
