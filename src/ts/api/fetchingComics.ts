@@ -53,12 +53,12 @@ const getComicsLastWeek = async () => {
     createLastComicsMurkUp(data);
     return data;
   } catch (error: any) {
-    Notify.failure(error.message);
+    return error.message;
   }
 };
 
 if (location.pathname === '/index.html') {
-  getComicsLastWeek();
+  getComicsLastWeek().catch(error => Notify.failure(error));
 }
 
 export const getOneComics = async (id: string) => {
@@ -118,9 +118,11 @@ export const getOneComics = async (id: string) => {
       charactersInfo,
     };
 
-    return { results: [oneComicData] };
+    const data = { results: [oneComicData] };
+
+    return data;
   } catch (error: any) {
-    Notify.failure(error.message);
+    return error.message;
   }
 };
 
@@ -135,8 +137,11 @@ export const searchComics = async (str: string) => {
       `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${str}`
     );
 
-    return data.results.map((item: Item) => item.title);
+    const searchTitle = data.results.map(
+      (item: Item) => item.title
+    ) as string[];
+    return searchTitle;
   } catch (error: any) {
-    Notify.failure(error.message);
+    return error.message;
   }
 };

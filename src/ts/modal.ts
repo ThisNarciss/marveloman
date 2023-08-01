@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix';
 import { getOneComics } from './api/fetchingComics';
 import { modalMarkUp } from './modal-mark-up';
 
@@ -13,12 +14,14 @@ modal.addEventListener('click', onBackdropClick);
 
 function onOpenModal(e: MouseEvent) {
   const { id } = e.target as HTMLElement;
-  getOneComics(id).then(data => {
-    modalMarkUp(data);
-    window.addEventListener('keydown', onEscKeyPress);
-    modal.classList.remove('is-hidden');
-    document.body.style.overflow = 'hidden';
-  });
+  getOneComics(id)
+    .then(data => {
+      modalMarkUp(data);
+      window.addEventListener('keydown', onEscKeyPress);
+      modal.classList.remove('is-hidden');
+      document.body.style.overflow = 'hidden';
+    })
+    .catch(error => Notify.failure(error));
 }
 
 function oncloseModal() {
