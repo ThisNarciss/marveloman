@@ -1,0 +1,54 @@
+<section class="section section-filter">
+  <div class="container">
+    <form class="filter_form">
+      <div class="input_box">
+        <label class="filter_form_label"
+          >Title Starts With<input
+            type="text"
+            name="text"
+            class="filter_form_input filter_form_input-search"
+            placeholder="Enter text"
+        /></label>
+        <button type="submit" class="filter_form_btn search-btn">
+          <svg width="18" height="18">
+            <use href="./src/images/sprite.svg#search"></use>
+          </svg>
+        </button>
+      </div>
+
+      <label class="filter_form_label"
+        >Format<select name="format" class="filter_form_select">
+          <option class="filter_form_option" selected value="comic">
+            Comic
+          </option>
+          <option class="filter_form_option" value="magazine">Magazine</option>
+          <option class="filter_form_option" value="trade paperback">
+            Trade paperback
+          </option>
+          <option class="filter_form_option" value="hardcover">
+            Hardcover
+          </option>
+          <option class="filter_form_option" value="digest">Digest</option>
+          <option class="filter_form_option" value="graphic novel">
+            Graphic novel
+          </option>
+          <option class="filter_form_option" value="digital comic">
+            Digital comic
+          </option>
+          <option class="filter_form_option" value="infinite comic">
+            infinite comic
+          </option>
+        </select></label
+      >
+      <label class="filter_form_label"
+        >Order by<select name="order" class="filter_form_select">
+          <option value="title">Title</option>
+          <option value="onsaleDate">On Sale Date</option>
+        </select></label
+      >
+      <label class="filter_form_label"
+        >Start Year<input type="date" name="date" class="filter_form_input"
+      /></label>
+    </form>
+  </div>
+</section>

@@ -4,31 +4,8 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { createLastComicsMurkUp } from '../comics-last-week-mark-up';
 import { Notify } from 'notiflix';
 import { urlChange } from '../utils/urlChange';
+import { CharacterItem, Item } from '../types/types';
 
-type Item = {
-  title: string;
-  thumbnail: { path: string; extension: string };
-  pageCount: number;
-  description: string;
-  format: string;
-  creators: {
-    items: {
-      name: string;
-      resourceURI: string;
-      role: string;
-    }[];
-  };
-  characters: { collectionURI: string };
-  images: { path: string; extension: string }[];
-  dates: { type: string; date: string }[];
-  prices: { type: string; price: number }[];
-};
-
-type CharacterItem = {
-  name: string;
-  thumbnail: { path: string; extension: string };
-  id: number;
-};
 const TIME_STAMP = Date.now();
 const { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY, VITE_BASE_API_URL } = import.meta
   .env;
@@ -88,30 +65,36 @@ export const getOneComics = async (id: string) => {
       data: { data: characterData },
     } = await axios.get(
       `${urlChange(
-        characters.collectionURI,
+        characters?.collectionURI,
         'comics'
       )}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
     );
 
-    const writer = creators.items.find(
-      creator => creator.role === 'writer' || 'editor'
-    );
-
-    const {
-      data: { data: creatorData },
-    } = await axios.get(
-      `${urlChange(
-        writer?.resourceURI,
-        'creators'
-      )}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
-    );
-
-    const { fullName, thumbnail: avatar } = creatorData.results[0];
     const charactersInfo = characterData.results.map(
       ({ name, id, thumbnail }: CharacterItem) => {
         return { name, id, thumbnail };
       }
     );
+
+    const writer = creators?.items.find(creator => creator.role === 'writer');
+
+    let writerInfo: {} | undefined = {};
+
+    if (writer) {
+      const {
+        data: { data: creatorData },
+      } = await axios.get(
+        `${urlChange(
+          writer?.resourceURI,
+          'creators'
+        )}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+      );
+      const { fullName, thumbnail: avatar } = creatorData.results[0];
+      writerInfo = { fullName, avatar };
+    } else {
+      writerInfo = '';
+    }
+
     const oneComicData = {
       title,
       description: description ?? '',
@@ -121,7 +104,7 @@ export const getOneComics = async (id: string) => {
       images,
       dates,
       prices,
-      creatorsInfo: { fullName, avatar },
+      writerInfo,
       charactersInfo,
     };
 

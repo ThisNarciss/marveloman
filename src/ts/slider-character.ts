@@ -3,6 +3,16 @@ import { toSlide } from './utils/slider';
 document.addEventListener('DOMContentLoaded', sliderHeroCharacterImg);
 
 const btnColor = ['#34387f', '#5b7f3c', '#600404'];
+const charText = [
+  'T’Challa is the king of the secretive and highly advanced African nation of Wakanda - as well as the powerful warrior known as the Black Panther.',
+  'Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulk.',
+  'With amazing spider-like abilities, teenage science whiz Peter Parker fights crime and dreams of becoming an Avenger as Spider-Man.',
+];
+const linearGradient = [
+  'linear-gradient(180deg,#34387f 36.46%,rgba(52, 56, 127, 0)100%)',
+  '#5B7F3C',
+  '#600404',
+];
 
 function sliderHeroCharacterImg() {
   const sliderImg = document.querySelector('.hero_img-box') as HTMLDivElement;
@@ -22,10 +32,15 @@ function sliderHeroCharacterImg() {
     '.character_slide'
   ) as NodeListOf<HTMLDivElement>;
   const allComicsRef = document.querySelector('.hero_link') as HTMLLinkElement;
-
   const sliderBtn = document.querySelectorAll(
     '.hero_btn'
   ) as NodeListOf<HTMLButtonElement>;
+  const characterText = document.querySelector(
+    '.character_text'
+  ) as HTMLParagraphElement;
+  const characterBlur = document.querySelector(
+    '.character-blur'
+  ) as HTMLDivElement;
 
   const slidesImgHeight = slidesImg[0].offsetHeight;
   const slidesCharacterHeight = slidesCharacter[0].offsetHeight;
@@ -59,6 +74,8 @@ function sliderHeroCharacterImg() {
       );
       btn.style.backgroundColor = btnColor[idx];
       allComicsRef.style.backgroundColor = btnColor[idx];
+      characterText.textContent = charText[idx];
+      characterBlur.style.background = linearGradient[idx];
 
       previousBtn = btn;
 
