@@ -1,26 +1,7 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Item } from './types/types';
 
 const modalBoxRef = document.querySelector('.modal_box') as HTMLDivElement;
-
-type Item = {
-  title: string;
-  thumbnail: { path: string; extension: string };
-  pageCount: number;
-  description: string;
-  format: string;
-  creatorsInfo: {
-    fullName: string;
-    avatar: { path: string; extension: string };
-  };
-  charactersInfo: {
-    name: string;
-    id: number;
-    thumbnail: { path: string; extension: string };
-  }[];
-  images: { path: string; extension: string }[];
-  dates: { type: string; date: string }[];
-  prices: { type: string; price: number }[];
-};
 
 interface IData {
   results: Item[];
@@ -110,15 +91,15 @@ export function modalMarkUp(data: IData) {
       </table>
         <div class="creator_box">
           <h2 class="description_title">Creator</h2>
-          <div class="creator_content"><img src="${
-            comic.creatorsInfo.avatar.path
-          }/portrait_medium.${
-    comic.creatorsInfo.avatar.extension
-  }" alt="creator avatar" class="creator_avatar" width='60' height='60' loading="lazy"/>
+          ${
+            comic.writerInfo
+              ? `<div class="creator_content"><img src="${comic.writerInfo.avatar.path}/portrait_medium.${comic.writerInfo.avatar.extension}" alt="creator avatar" class="creator_avatar" width='60' height='60' loading="lazy"/>
           <div class="creator-info_box">
             <p class="creator_text">Writer</p>
-            <h3 class="creator_name">${comic.creatorsInfo.fullName}</h3>
-          </div></div>
+            <h3 class="creator_name">${comic.writerInfo.fullName}</h3>
+          </div></div>`
+              : '<p class="creator_text">No writer info</p>'
+          }
           
         </div>
         <div class="characters box">

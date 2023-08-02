@@ -34,7 +34,7 @@
 .last-comics_list_img {
   width: 448px;
   height: 519px;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
   pointer-events: all;
@@ -86,7 +86,6 @@
   border: none;
   color: var(--default-text-color);
   fill: currentColor;
-  //   transition: background-color var(--animation), color var(--animation);
   &.slide-right {
     transform: rotateZ(180deg);
   }

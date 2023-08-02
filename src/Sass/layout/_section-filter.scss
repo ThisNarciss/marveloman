@@ -1,0 +1,54 @@
+.section-filter {
+  padding: 64px 0;
+}
+
+.filter_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.filter_form_label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  color: rgba(250, 250, 250, 0.3);
+  line-height: 1.29;
+}
+
+.filter_form_input,
+.filter_form_select {
+  display: flex;
+  padding: 16px 24px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100px;
+  border: 2px solid var(--second-bg-color);
+  background: #171717;
+
+  color: var(--default-text-color);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.13;
+  &-search {
+    background-color: var(--second-bg-color);
+  }
+  &-search::placeholder {
+    color: var(--default-text-color);
+    font-size: 16px;
+    line-height: 1.13;
+  }
+}
+
+.input_box {
+  position: relative;
+}
+
+.filter_form_btn {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+}
