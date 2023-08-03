@@ -22,7 +22,7 @@ export function modalMarkUp(data: IData) {
     .map(
       img => `<li class="gallery_item"><img
           class="gallery_img"
-          src="${img.path}/portrait_uncanny.${img.extension}"
+          src="https${img.path.slice(4)}/portrait_uncanny.${img.extension}"
           alt="comics cover"
           width="100"
           height="150"
@@ -43,9 +43,11 @@ export function modalMarkUp(data: IData) {
   const characters = comic.charactersInfo
     .map(
       char =>
-        `<li id="${char.id}" class='characters_item'><img src="${
-          char.thumbnail.path
-        }/portrait_medium.${
+        `<li id="${
+          char.id
+        }" class='characters_item'><img src="https${char.thumbnail.path.slice(
+          4
+        )}/portrait_medium.${
           char.thumbnail.extension
         }" alt="creator avatar" class="creator_avatar" loading="lazy" width="60"
           height="60"/><h3 class="characters_name">${nameSlice(
@@ -57,7 +59,7 @@ export function modalMarkUp(data: IData) {
   const murkUp = `<div class="comics_images_box">
         <img
           class="comics_cover"
-          src="${comic.thumbnail.path}/portrait_uncanny.${
+          src="https${comic.thumbnail.path.slice(4)}/portrait_uncanny.${
     comic.thumbnail.extension
   }"
           alt="comics cover"
@@ -100,7 +102,11 @@ export function modalMarkUp(data: IData) {
           <h2 class="description_title">Creator</h2>
           ${
             comic.writerInfo
-              ? `<div class="creator_content"><img src="${comic.writerInfo.avatar.path}/portrait_medium.${comic.writerInfo.avatar.extension}" alt="creator avatar" class="creator_avatar" width='60' height='60' loading="lazy"/>
+              ? `<div class="creator_content"><img src="https${comic.writerInfo.avatar.path.slice(
+                  4
+                )}/portrait_medium.${
+                  comic.writerInfo.avatar.extension
+                }" alt="creator avatar" class="creator_avatar" width='60' height='60' loading="lazy"/>
           <div class="creator-info_box">
             <p class="creator_text">Writer</p>
             <h3 class="creator_name">${comic.writerInfo.fullName}</h3>

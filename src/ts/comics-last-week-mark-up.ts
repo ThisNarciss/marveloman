@@ -19,9 +19,11 @@ export const createLastComicsMurkUp = (data: IData) => {
   const murkUpArr = results.map(item => {
     return `
         <li class="last-comics_list_item">
-        <article><img id=${item.id}  class="last-comics_list_img" src="${
-      item.thumbnail.path
-    }/portrait_uncanny.${
+        <article><img id=${
+          item.id
+        }  class="last-comics_list_img" src="https${item.thumbnail.path.slice(
+      4
+    )}/portrait_uncanny.${
       item.thumbnail.extension
     }" alt="comics article" loading="lazy" width="448" height="519">
         <h3 class="last-comics_list_title">${item.title}</h3>
