@@ -1,0 +1,58 @@
+.comics {
+  padding-top: 0;
+}
+
+.comics_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.comics_list_item {
+  max-width: 332px;
+}
+
+.comics_list_img {
+  width: 332px;
+  height: 445px;
+  border-radius: 8px;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.comics_list_title {
+  color: var(--default-text-color);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.48px;
+  margin-bottom: 8px;
+}
+
+.comics_list_text {
+  color: rgba(250, 250, 250, 0.5);
+  font-size: 16px;
+  line-height: 1.13;
+}
+
+.no-results_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/src/images/boom.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-inline: auto;
+  max-width: 375px;
+  height: 221px;
+}
+
+.no-results_text {
+  color: var(--default-text-color);
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.17;
+  letter-spacing: -0.48px;
+}

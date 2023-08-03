@@ -15,7 +15,7 @@ export function modalMarkUp(data: IData) {
   const price = comic.prices.find(item => item.type === 'printPrice')?.price;
 
   const date = comic.dates
-    .find(item => item.type === 'focDate')
+    .find(item => item.type === 'onsaleDate')
     ?.date.slice(0, 4);
 
   const gallery = comic.images
@@ -32,6 +32,14 @@ export function modalMarkUp(data: IData) {
     )
     .join('');
 
+  const nameSlice = (name: string) => {
+    const idx = name.indexOf('(');
+    if (idx === -1) {
+      return name;
+    }
+    return name.slice(0, idx);
+  };
+
   const characters = comic.charactersInfo
     .map(
       char =>
@@ -40,9 +48,8 @@ export function modalMarkUp(data: IData) {
         }/portrait_medium.${
           char.thumbnail.extension
         }" alt="creator avatar" class="creator_avatar" loading="lazy" width="60"
-          height="60"/><h3 class="characters_name">${char.name.slice(
-            0,
-            char.name.indexOf('(')
+          height="60"/><h3 class="characters_name">${nameSlice(
+            char.name
           )}</h3></li>`
     )
     .join('');

@@ -1,6 +1,7 @@
 import { Notify } from 'notiflix';
-import { searchComics } from './api/fetchingComics';
+import { getComics, searchComics } from './api/fetchingComics';
 import { dropdownMarkUp } from './dropdown-mark-up';
+import { createComicsMurkUp } from './comics-mark-up';
 
 const searchInput = document.querySelector('.search_input') as HTMLInputElement;
 const searchForm = document.querySelector('.search_form') as HTMLFormElement;
@@ -23,10 +24,16 @@ function handleSubmit(e: Event) {
   const inputElement = form.elements.namedItem('fav') as HTMLInputElement;
 
   const value: string = inputElement.value.trim();
-  if (value) {
-    localStorage.setItem('searchComic', value);
-  }
+
   if (location.pathname === ('/index.html' || '/') && value) {
+    localStorage.setItem('searchComic', value);
     location.assign('./comics.html');
+  }
+
+  if (location.pathname === '/comics.html' && value) {
+    localStorage.setItem('searchComic', '');
+    getComics(value)
+      .then(data => createComicsMurkUp(data))
+      .catch(error => Notify.failure(error));
   }
 }

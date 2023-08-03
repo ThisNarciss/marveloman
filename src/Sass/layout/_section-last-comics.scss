@@ -1,3 +1,17 @@
+@keyframes skeleton {
+  0% {
+    color: rgba(250, 250, 250, 0.5);
+  }
+
+  50% {
+    color: rgba(71, 70, 70, 0.5);
+  }
+
+  100% {
+    color: rgba(250, 250, 250, 0.5);
+  }
+}
+
 .last-comics_title {
   color: var(--default-text-color);
   font-size: 44px;
@@ -70,7 +84,7 @@
 
   height: 609px;
   width: 448px;
-
+  animation: skeleton 1000ms linear infinite alternate;
   color: rgba(250, 250, 250, 0.5);
   fill: currentColor;
 }
