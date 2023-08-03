@@ -6,18 +6,20 @@ const modal = document.querySelector('.backdrop') as HTMLDivElement;
 const comicsList = document.querySelectorAll(
   '.last-comics_list'
 ) as NodeListOf<HTMLUListElement>;
+
 const modalBtn = document.querySelector('.modal_btn') as HTMLButtonElement;
 
 comicsList.forEach(item => item.addEventListener('click', onOpenModal));
+
 modalBtn.addEventListener('click', oncloseModal);
 modal.addEventListener('click', onBackdropClick);
 
-function onOpenModal(e: MouseEvent) {
+export function onOpenModal(e: MouseEvent) {
   const { id } = e.target as HTMLElement;
+  window.addEventListener('keydown', onEscKeyPress);
   getOneComics(id)
     .then(data => {
       modalMarkUp(data);
-      window.addEventListener('keydown', onEscKeyPress);
       modal.classList.remove('is-hidden');
       document.body.style.overflow = 'hidden';
     })

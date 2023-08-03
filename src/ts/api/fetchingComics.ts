@@ -4,7 +4,9 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { createLastComicsMurkUp } from '../comics-last-week-mark-up';
 import { Notify } from 'notiflix';
 import { urlChange } from '../utils/urlChange';
-import { CharacterItem, Item } from '../types/types';
+import { CharacterItem, Item, SubmitData } from '../types/types';
+import author from '../utils/searchWriter';
+import { createComicsMurkUp } from '../comics-mark-up';
 
 const TIME_STAMP = Date.now();
 const { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY, VITE_BASE_API_URL } = import.meta
@@ -19,6 +21,60 @@ Loading.init({
 });
 
 axios.defaults.baseURL = VITE_BASE_API_URL;
+
+export const getComics = async (textValue: string) => {
+  try {
+    Loading.circle();
+    if (!textValue) {
+      return;
+    }
+    const {
+      data: { data },
+    } = await axios.get(
+      `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${textValue}&limit=16`
+    );
+
+    return data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+if (location.pathname === '/comics.html') {
+  const searchComic = localStorage.getItem('searchComic') || '';
+  if (searchComic) {
+    getComics(searchComic)
+      .then(data => createComicsMurkUp(data))
+      .catch(error => {
+        Notify.failure(error);
+        Loading.remove();
+      });
+  }
+}
+
+export const getFilteredComics = async (obj: SubmitData) => {
+  try {
+    Loading.circle();
+    const { textValue, formatValue, orderValue, dateValue } = obj;
+
+    let comicsUrlSearch = `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&format=${formatValue}&orderBy=${orderValue}&limit=16`;
+
+    if (textValue) {
+      comicsUrlSearch += `&titleStartsWith=${textValue}`;
+    }
+    if (dateValue) {
+      comicsUrlSearch += `&startYear=${dateValue}`;
+    }
+
+    const {
+      data: { data },
+    } = await axios.get(comicsUrlSearch);
+
+    return data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
 
 const getComicsLastWeek = async () => {
   try {
@@ -36,7 +92,11 @@ const getComicsLastWeek = async () => {
 };
 
 if (location.pathname !== '/comics.html') {
-  getComicsLastWeek().catch(error => Notify.failure(error));
+  localStorage.setItem('searchComic', '');
+  getComicsLastWeek().catch(error => {
+    Notify.failure(error);
+    Loading.remove();
+  });
 }
 
 export const getOneComics = async (id: string) => {
@@ -76,7 +136,7 @@ export const getOneComics = async (id: string) => {
       }
     );
 
-    const writer = creators?.items.find(creator => creator.role === 'writer');
+    const writer = author(creators.items);
 
     let writerInfo: {} | undefined = {};
 
@@ -85,7 +145,7 @@ export const getOneComics = async (id: string) => {
         data: { data: creatorData },
       } = await axios.get(
         `${urlChange(
-          writer?.resourceURI,
+          writer.resourceURI,
           'creators'
         )}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
       );

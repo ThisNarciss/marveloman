@@ -31,3 +31,23 @@ export type CharacterItem = {
   thumbnail: { path: string; extension: string };
   id: number;
 };
+
+export type Creator = {
+  name: string;
+  resourceURI: string;
+  role: string;
+};
+
+export type LastComicItem = {
+  id: number;
+  thumbnail: { path: string; extension: string };
+  title: string;
+  creators: { items: Creator[] };
+};
+
+export type SubmitData = {
+  textValue: string;
+  formatValue: string;
+  orderValue: string;
+  dateValue: string;
+};

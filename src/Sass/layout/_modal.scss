@@ -37,7 +37,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1000px;
+  max-width: 1000px;
   height: auto;
   overflow: auto;
   padding: 64px 32px;
@@ -152,7 +152,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 1.13;
-
+  vertical-align: baseline;
   width: 20%;
 }
 
@@ -192,12 +192,15 @@
 
 .characters_list {
   display: flex;
+
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .characters_item {
   display: flex;
   align-items: center;
+  flex-basis: calc((100% - 30px) / 3);
   gap: 8px;
 }
 

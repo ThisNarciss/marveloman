@@ -1,4 +1,6 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { LastComicItem } from './types/types';
+import writer from './utils/searchWriter';
 
 const lastComicsSlideOneRef = document.querySelector(
   '.slide-one'
@@ -7,31 +9,12 @@ const lastComicsSlideTwoRef = document.querySelector(
   '.slide-two'
 ) as HTMLDivElement;
 
-type Creator = {
-  name: string;
-  resourceURI: string;
-  role: string;
-};
-
-type Item = {
-  id: number;
-  thumbnail: { path: string; extension: string };
-  title: string;
-  creators: { items: Creator[] };
-};
-
 interface IData {
-  results: Item[];
+  results: LastComicItem[];
 }
 
 export const createLastComicsMurkUp = (data: IData) => {
   const { results } = data;
-
-  const writer = (arr: any[]) => {
-    const name = arr.find((item: Creator) => item.role === 'writer');
-
-    return name;
-  };
 
   const murkUpArr = results.map(item => {
     return `
@@ -54,6 +37,6 @@ export const createLastComicsMurkUp = (data: IData) => {
   const murkUpSecondSlide = [...murkUpArr.slice(3)].join('');
 
   lastComicsSlideOneRef.innerHTML = murkUpFirstSlide;
-  lastComicsSlideTwoRef.insertAdjacentHTML('beforeend', murkUpSecondSlide);
+  lastComicsSlideTwoRef.innerHTML = murkUpSecondSlide;
   Loading.remove();
 };

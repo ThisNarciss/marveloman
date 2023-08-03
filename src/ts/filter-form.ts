@@ -1,3 +1,8 @@
+import { Loading, Notify } from 'notiflix';
+import { getFilteredComics } from './api/fetchingComics';
+import { createComicsMurkUp } from './comics-mark-up';
+import { SubmitData } from './types/types';
+
 const filterForm = document.querySelector('.filter_form') as HTMLFormElement;
 
 filterForm.addEventListener('submit', handleSubmit);
@@ -13,7 +18,16 @@ function handleSubmit(e: Event) {
   const textValue: string = inputTextEl.value.trim();
   const formatValue: string = selectFormatEl.value.trim();
   const orderValue: string = selectOrderEl.value.trim();
-  const dataValue: string = inputDateEl.value.trim();
+  const dateValue: string = inputDateEl.value.slice(0, 4).trim();
 
-  console.log({ textValue, formatValue, orderValue, dataValue });
+  const data: SubmitData = { textValue, formatValue, orderValue, dateValue };
+  localStorage.setItem('searchComic', '');
+  getFilteredComics(data)
+    .then(data => {
+      createComicsMurkUp(data);
+    })
+    .catch(error => {
+      Notify.failure(error);
+      Loading.remove();
+    });
 }
