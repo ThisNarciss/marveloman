@@ -1,5 +1,7 @@
 export type Item = {
+  id: string;
   title: string;
+  series: { name: string };
   thumbnail: { path: string; extension: string };
   pageCount: number;
   description: string;
@@ -41,7 +43,7 @@ export type Creator = {
 export type LastComicItem = {
   id: number;
   thumbnail: { path: string; extension: string };
-  title: string;
+  series: { name: string };
   creators: { items: Creator[] };
 };
 
@@ -50,4 +52,12 @@ export type SubmitData = {
   formatValue: string;
   orderValue: string;
   dateValue: string;
+};
+
+export type CharacterData = {
+  comics: { items: { resourceURI: string; name: string }[] };
+  description: string;
+  name: string;
+  thumbnail: { extension: string; path: string };
+  modified: string;
 };

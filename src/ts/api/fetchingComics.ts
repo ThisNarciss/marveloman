@@ -76,6 +76,22 @@ export const getFilteredComics = async (obj: SubmitData) => {
   }
 };
 
+export const getCharacter = async (id: string) => {
+  try {
+    Loading.circle();
+    const {
+      data: { data },
+    } = await axios.get(
+      `/characters/${id}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+    );
+
+    const { comics, description, name, thumbnail, modified } = data.results[0];
+    return { comics, description, name, thumbnail, modified };
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
 const getComicsLastWeek = async () => {
   try {
     Loading.circle();
@@ -107,11 +123,13 @@ export const getOneComics = async (id: string) => {
     } = await axios.get(
       `/comics/${id}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
     );
+    console.log(comicData.results[0]);
 
     const {
+      id: comicId,
       characters,
       creators,
-      title,
+      series,
       description,
       thumbnail,
       pageCount,
@@ -156,7 +174,8 @@ export const getOneComics = async (id: string) => {
     }
 
     const oneComicData = {
-      title,
+      comicId,
+      series,
       description: description ?? '',
       thumbnail,
       pageCount,

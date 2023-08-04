@@ -32,7 +32,7 @@ export const createComicsMurkUp = (data: IData) => {
             )}/portrait_uncanny.${
               item.thumbnail.extension
             }" alt="comics article" loading="lazy" width="332" height="445">
-        <h3 class="comics_list_title">${item.title}</h3>
+        <h3 class="comics_list_title">${item.series.name}</h3>
         <p class="comics_list_text">${
           writer(item.creators.items)?.name ?? 'No info'
         }</p></article>

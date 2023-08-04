@@ -1,5 +1,6 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Item } from './types/types';
+import { dateChanger } from './utils/dateChanger';
 
 const modalBoxRef = document.querySelector('.modal_box') as HTMLDivElement;
 
@@ -14,9 +15,7 @@ export function modalMarkUp(data: IData) {
 
   const price = comic.prices.find(item => item.type === 'printPrice')?.price;
 
-  const date = comic.dates
-    .find(item => item.type === 'onsaleDate')
-    ?.date.slice(0, 4);
+  const date = comic.dates.find(item => item.type === 'onsaleDate')?.date;
 
   const gallery = comic.images
     .map(
@@ -44,13 +43,11 @@ export function modalMarkUp(data: IData) {
   const characters = comic.charactersInfo
     .map(
       char =>
-        `<li id="${
+        `<li  class='characters_item'><img id="${
           char.id
-        }" class='characters_item'><img src="https${char.thumbnail.path.slice(
-          4
-        )}/portrait_medium.${
+        }" src="https${char.thumbnail.path.slice(4)}/portrait_medium.${
           char.thumbnail.extension
-        }" alt="creator avatar" class="creator_avatar" loading="lazy" width="60"
+        }" alt="creator avatar" class="character_avatar" loading="lazy" width="60"
           height="60"/><h3 class="characters_name">${nameSlice(
             char.name
           )}</h3></li>`
@@ -76,7 +73,16 @@ export function modalMarkUp(data: IData) {
       </div>
       <div class="description_box">
         <div class="text_box">
-          <h2 class="description_title">${comic.title}</h2>
+        <div class="title-box"><h2 class="description_title">${
+          comic.series.name
+        }</h2>${
+    comic.writerInfo
+      ? `<p class="description_label">${
+          comic.writerInfo.fullName
+        } | ${dateChanger(date)}</p>`
+      : ''
+  }</div>
+          
           <p class="description_text">${
             comic.description || 'No description info'
           }</p>
@@ -93,7 +99,7 @@ export function modalMarkUp(data: IData) {
         <tbody>
         <tr class="description_table_row">
           <td class="description_table_data">${comic.format}</td>
-          <td class="description_table_data">${date}</td>
+          <td class="description_table_data">${date?.slice(0, 4)}</td>
           <td class="description_table_data">${comic.pageCount}</td>
           <td class="description_table_data">$${price}</td>
         </tr>

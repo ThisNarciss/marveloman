@@ -26,7 +26,7 @@ export const createLastComicsMurkUp = (data: IData) => {
     )}/portrait_uncanny.${
       item.thumbnail.extension
     }" alt="comics article" loading="lazy" width="448" height="519">
-        <h3 class="last-comics_list_title">${item.title}</h3>
+        <h3 class="last-comics_list_title">${item.series.name}</h3>
         <p class="last-comics_list_text">${
           writer(item.creators.items)?.name ?? 'No info'
         }</p></article>
