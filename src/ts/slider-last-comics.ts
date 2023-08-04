@@ -31,7 +31,7 @@ function sliderLastComics() {
     }
     btn.addEventListener('click', () => {
       if (prevBtn !== null) {
-        prevBtn.style.backgroundColor = '#34387f';
+        prevBtn.style.backgroundColor = 'var(--second-bg-color)';
         prevBtn.style.border = 'none';
         prevBtn.style.color = '#fafafa';
       }
