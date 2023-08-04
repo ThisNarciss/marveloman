@@ -91,7 +91,9 @@
 }
 
 .comics_cover {
+  display: block;
   margin-bottom: 8px;
+
   width: 332px;
   height: 445px;
   border-radius: 8px;
@@ -99,6 +101,7 @@
 
 .gallery_list {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -235,8 +238,6 @@
   width: 100px;
 }
 
-.comics-width {
-  max-width: 588px;
-  height: 200px;
-  overflow: auto;
+.comics_images_box {
+  max-width: 332px;
 }

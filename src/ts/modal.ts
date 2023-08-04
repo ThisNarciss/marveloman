@@ -1,8 +1,4 @@
-import { Loading, Notify } from 'notiflix';
-import { getCharacter, getOneComics } from './api/fetchingComics';
-import { modalMarkUp } from './modal-mark-up';
-import { onGalleryModalOpen } from './gallery-modal';
-import { characterMarkUp } from './character-mark-up';
+import { modalModifier } from './utils/modalModifier';
 
 const modal = document.querySelector('.backdrop') as HTMLDivElement;
 const comicsList = document.querySelectorAll(
@@ -19,34 +15,7 @@ modal.addEventListener('click', onBackdropClick);
 export function onOpenModal(e: MouseEvent) {
   const { id } = e.target as HTMLElement;
   window.addEventListener('keydown', onEscKeyPress);
-  getOneComics(id)
-    .then(data => {
-      modalMarkUp(data);
-      modal.classList.remove('is-hidden');
-      document.body.style.overflow = 'hidden';
-      const galleryImg = document.querySelectorAll(
-        '.gallery_img'
-      ) as NodeListOf<HTMLImageElement>;
-      const characterImg = document.querySelectorAll(
-        '.character_avatar'
-      ) as NodeListOf<HTMLImageElement>;
-
-      characterImg.forEach(img =>
-        img.addEventListener('click', (e: MouseEvent) => {
-          const { id } = e.target as HTMLImageElement;
-
-          getCharacter(id).then(data => characterMarkUp(data));
-        })
-      );
-
-      galleryImg.forEach(img =>
-        img.addEventListener('click', onGalleryModalOpen)
-      );
-    })
-    .catch(error => {
-      Notify.failure(error);
-      Loading.remove();
-    });
+  modalModifier(id);
 }
 
 function oncloseModal() {

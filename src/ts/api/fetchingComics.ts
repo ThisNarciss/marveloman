@@ -92,6 +92,23 @@ export const getCharacter = async (id: string) => {
   }
 };
 
+export const getCharacterComics = async (url: string) => {
+  try {
+    const {
+      data: { data },
+    } = await axios.get(
+      `${urlChange(
+        url,
+        'characters'
+      )}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
+    );
+
+    return data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
 const getComicsLastWeek = async () => {
   try {
     Loading.circle();
@@ -123,7 +140,6 @@ export const getOneComics = async (id: string) => {
     } = await axios.get(
       `/comics/${id}?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}`
     );
-    console.log(comicData.results[0]);
 
     const {
       id: comicId,
