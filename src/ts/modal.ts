@@ -1,6 +1,7 @@
 import { Loading, Notify } from 'notiflix';
 import { getOneComics } from './api/fetchingComics';
 import { modalMarkUp } from './modal-mark-up';
+import { onGalleryModalOpen } from './gallery-modal';
 
 const modal = document.querySelector('.backdrop') as HTMLDivElement;
 const comicsList = document.querySelectorAll(
@@ -22,6 +23,13 @@ export function onOpenModal(e: MouseEvent) {
       modalMarkUp(data);
       modal.classList.remove('is-hidden');
       document.body.style.overflow = 'hidden';
+      const galleryImg = document.querySelectorAll(
+        '.gallery_img'
+      ) as NodeListOf<HTMLImageElement>;
+
+      galleryImg.forEach(img =>
+        img.addEventListener('click', onGalleryModalOpen)
+      );
     })
     .catch(error => {
       Notify.failure(error);
