@@ -106,11 +106,7 @@
   flex-shrink: 0;
   border-radius: 200000px;
   transition: background var(--animation);
-  background: linear-gradient(
-    180deg,
-    #34387f 36.46%,
-    rgba(52, 56, 127, 0) 100%
-  );
+  background-color: var(--second-bg-color);
   filter: blur(47px);
   z-index: -1;
 }

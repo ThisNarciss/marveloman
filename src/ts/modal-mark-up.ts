@@ -21,6 +21,7 @@ export function modalMarkUp(data: IData) {
   const gallery = comic.images
     .map(
       img => `<li class="gallery_item"><img
+      id="https${img.path.slice(4)}"
           class="gallery_img"
           src="https${img.path.slice(4)}/portrait_uncanny.${img.extension}"
           alt="comics cover"
