@@ -23,24 +23,6 @@ Loading.init({
 
 axios.defaults.baseURL = VITE_BASE_API_URL;
 
-// export const getComics = async (textValue: string) => {
-//   try {
-//     Loading.circle();
-//     if (!textValue) {
-//       return;
-//     }
-//     const {
-//       data: { data },
-//     } = await axios.get(
-//       `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${textValue}&limit=16`
-//     );
-
-//     return data;
-//   } catch (error: any) {
-//     return error.message;
-//   }
-// };
-
 export const getFilteredComics = async (obj: SubmitData, page: number = 0) => {
   try {
     Loading.circle();
@@ -73,8 +55,9 @@ export const getFilteredComics = async (obj: SubmitData, page: number = 0) => {
 };
 
 if (location.pathname === '/comics.html') {
-  const searchComic =
-    JSON.parse(localStorage.getItem('searchComic') as string) || '';
+  const searchComic = JSON.parse(
+    localStorage.getItem('searchComic') as string
+  ) || { textValue: '' };
 
   if (searchComic) {
     getFilteredComics(searchComic)
@@ -138,7 +121,7 @@ const getComicsLastWeek = async () => {
 };
 
 if (location.pathname !== '/comics.html') {
-  localStorage.setItem('searchComic', '');
+  localStorage.setItem('searchComic', JSON.stringify({ textValue: '' }));
   getComicsLastWeek().catch(error => {
     Notify.failure(error);
     Loading.remove();
