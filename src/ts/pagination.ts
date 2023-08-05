@@ -12,9 +12,13 @@ export const pagination = (currentPage: number, data: IData) => {
   const paginationBox = document.querySelector(
     '.pagination-box'
   ) as HTMLDivElement;
+
   paginationBox.addEventListener('click', createPagMarkUp);
+
   const { limit, total } = data;
+
   if (total === 0) {
+    paginationBox.innerHTML = '';
     return;
   }
   let markUp = '';
@@ -28,19 +32,18 @@ export const pagination = (currentPage: number, data: IData) => {
 
   if (currentPage === 1) {
     markUp +=
-      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-left btn--disabled">left</button></li>';
+      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-left btn--disabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
   } else {
     markUp +=
-      '<li class="pag_item"><button type="button" class="pag_btn btn-left btn--enabled">left</button></li>';
+      '<li class="pag_item"><button type="button" class="pag_btn btn-left btn--enabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
   }
   if (currentPage > 1) {
     markUp +=
       '<li class="pag_item"><button type="button" class="pag_btn">1</button></li>';
   }
-
   if (currentPage > 3) {
     markUp +=
-      '<li class="pag_item"><button type="button" class="pag_btn">...</button></li>';
+      '<li class="pag_item"><button type="button" class="pag_btn btn-points">...</button></li>';
   }
   if (currentPage === pageCount) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${beforeTwoPage}</button></li>`;
@@ -50,7 +53,7 @@ export const pagination = (currentPage: number, data: IData) => {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${beforeOnePage}</button></li>`;
   }
 
-  markUp += `<li class="pag_item"><button type="button" class="pag_btn">${currentPage}</button></li>`;
+  markUp += `<li class="pag_item"><button type="button" class="pag_btn active-pag-btn">${currentPage}</button></li>`;
   if (pageCount - 1 > currentPage) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${afterOnePage}</button></li>`;
   }
@@ -59,17 +62,17 @@ export const pagination = (currentPage: number, data: IData) => {
   }
 
   if (pageCount - 2 > currentPage) {
-    markUp += `<li class="pag_item"><button type="button" class="pag_btn">...</button></li>`;
+    markUp += `<li class="pag_item"><button type="button" class="pag_btn btn-points">...</button></li>`;
   }
   if (pageCount > currentPage) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${pageCount}</button></li>`;
   }
   if (currentPage === pageCount) {
     markUp +=
-      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-right btn--disabled">right</button></li>';
+      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-right btn--disabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
   } else {
     markUp +=
-      '<li class="pag_item"><button type="button" class="pag_btn btn-right btn--enabled">right</button></li>';
+      '<li class="pag_item"><button type="button" class="pag_btn btn-right btn--enabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
   }
   paginationBox.innerHTML = `<ul class="pag_list">${markUp}</ul>`;
 };
@@ -77,14 +80,7 @@ export const pagination = (currentPage: number, data: IData) => {
 function createPagMarkUp(e: MouseEvent) {
   const el = e.target as HTMLElement;
 
-  if (el.nodeName !== 'BUTTON') {
-    return;
-  }
-  if (el.textContent === '...') {
-    return;
-  }
-
-  if (el.classList.contains('btn-right')) {
+  if (Boolean(el.closest('.btn-right'))) {
     globalCurrentPage += 1;
     const parseData = JSON.parse(localStorage.getItem('searchComic') as string);
     getFilteredComics(parseData, globalCurrentPage).then(data => {
@@ -94,13 +90,20 @@ function createPagMarkUp(e: MouseEvent) {
     return;
   }
 
-  if (el.classList.contains('btn-left')) {
+  if (Boolean(el.closest('.btn-left'))) {
     globalCurrentPage -= 1;
     const parseData = JSON.parse(localStorage.getItem('searchComic') as string);
     getFilteredComics(parseData, globalCurrentPage).then(data => {
       createComicsMurkUp(data);
       pagination(globalCurrentPage, data);
     });
+    return;
+  }
+
+  if (el.nodeName !== 'BUTTON') {
+    return;
+  }
+  if (el.textContent === '...') {
     return;
   }
 
