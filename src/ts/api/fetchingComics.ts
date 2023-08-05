@@ -7,6 +7,7 @@ import { urlChange } from '../utils/urlChange';
 import { CharacterItem, Item, SubmitData } from '../types/types';
 import author from '../utils/searchWriter';
 import { createComicsMurkUp } from '../comics-mark-up';
+import { pagination } from '../pagination';
 
 const TIME_STAMP = Date.now();
 const { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY, VITE_BASE_API_URL } = import.meta
@@ -22,48 +23,43 @@ Loading.init({
 
 axios.defaults.baseURL = VITE_BASE_API_URL;
 
-export const getComics = async (textValue: string) => {
-  try {
-    Loading.circle();
-    if (!textValue) {
-      return;
-    }
-    const {
-      data: { data },
-    } = await axios.get(
-      `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${textValue}&limit=16`
-    );
+// export const getComics = async (textValue: string) => {
+//   try {
+//     Loading.circle();
+//     if (!textValue) {
+//       return;
+//     }
+//     const {
+//       data: { data },
+//     } = await axios.get(
+//       `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&titleStartsWith=${textValue}&limit=16`
+//     );
 
-    return data;
-  } catch (error: any) {
-    return error.message;
-  }
-};
+//     return data;
+//   } catch (error: any) {
+//     return error.message;
+//   }
+// };
 
-if (location.pathname === '/comics.html') {
-  const searchComic = localStorage.getItem('searchComic') || '';
-  if (searchComic) {
-    getComics(searchComic)
-      .then(data => createComicsMurkUp(data))
-      .catch(error => {
-        Notify.failure(error);
-        Loading.remove();
-      });
-  }
-}
-
-export const getFilteredComics = async (obj: SubmitData) => {
+export const getFilteredComics = async (obj: SubmitData, page: number = 0) => {
   try {
     Loading.circle();
     const { textValue, formatValue, orderValue, dateValue } = obj;
 
-    let comicsUrlSearch = `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&format=${formatValue}&orderBy=${orderValue}&limit=16`;
+    let comicsUrlSearch = `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&limit=16&offset=${page}`;
 
     if (textValue) {
       comicsUrlSearch += `&titleStartsWith=${textValue}`;
     }
     if (dateValue) {
       comicsUrlSearch += `&startYear=${dateValue}`;
+    }
+
+    if (formatValue) {
+      comicsUrlSearch += `&format=${formatValue}`;
+    }
+    if (orderValue) {
+      comicsUrlSearch += `&orderBy=${orderValue}`;
     }
 
     const {
@@ -75,6 +71,23 @@ export const getFilteredComics = async (obj: SubmitData) => {
     return error.message;
   }
 };
+
+if (location.pathname === '/comics.html') {
+  const searchComic =
+    JSON.parse(localStorage.getItem('searchComic') as string) || '';
+
+  if (searchComic) {
+    getFilteredComics(searchComic)
+      .then(data => {
+        createComicsMurkUp(data);
+        pagination(1, data);
+      })
+      .catch(error => {
+        Notify.failure(error);
+        Loading.remove();
+      });
+  }
+}
 
 export const getCharacter = async (id: string) => {
   try {

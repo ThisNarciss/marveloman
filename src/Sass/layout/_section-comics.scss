@@ -56,3 +56,44 @@
   line-height: 1.17;
   letter-spacing: -0.48px;
 }
+
+.pagination-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 64px;
+}
+
+.pag_list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pag_btn {
+  padding: 7px 7px;
+  border-radius: 4px;
+  min-width: 32px;
+  height: 32px;
+
+  border: 1px solid rgba(250, 250, 250, 0.3);
+  background-color: #171717;
+
+  color: var(--default-text-color);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.27;
+}
+
+.btn--disabled {
+  opacity: 0.5;
+  border: none;
+}
+.btn--enabled {
+  background: var(--second-bg-color);
+  border: none;
+}

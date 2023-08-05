@@ -48,10 +48,10 @@ export type LastComicItem = {
 };
 
 export type SubmitData = {
-  textValue: string;
-  formatValue: string;
-  orderValue: string;
-  dateValue: string;
+  textValue?: string;
+  formatValue?: string;
+  orderValue?: string;
+  dateValue?: string;
 };
 
 export type CharacterData = {

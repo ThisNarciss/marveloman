@@ -1,7 +1,8 @@
 import { Notify } from 'notiflix';
-import { getComics, searchComics } from './api/fetchingComics';
+import { getFilteredComics, searchComics } from './api/fetchingComics';
 import { dropdownMarkUp } from './dropdown-mark-up';
 import { createComicsMurkUp } from './comics-mark-up';
+import { pagination } from './pagination';
 
 const searchInput = document.querySelector('.search_input') as HTMLInputElement;
 const searchForm = document.querySelector('.search_form') as HTMLFormElement;
@@ -24,16 +25,21 @@ function handleSubmit(e: Event) {
   const inputElement = form.elements.namedItem('fav') as HTMLInputElement;
 
   const value: string = inputElement.value.trim();
-
-  if (location.pathname === ('/index.html' || '/') && value) {
-    localStorage.setItem('searchComic', value);
+  if (!value) {
+    return;
+  }
+  if (location.pathname !== '/comics.html' && value) {
+    localStorage.setItem('searchComic', JSON.stringify({ textValue: value }));
     location.assign('./comics.html');
   }
 
   if (location.pathname === '/comics.html' && value) {
-    localStorage.setItem('searchComic', '');
-    getComics(value)
-      .then(data => createComicsMurkUp(data))
+    localStorage.setItem('searchComic', JSON.stringify({ textValue: value }));
+    getFilteredComics({ textValue: value })
+      .then(data => {
+        createComicsMurkUp(data);
+        pagination(1, data);
+      })
       .catch(error => Notify.failure(error));
   }
 }
