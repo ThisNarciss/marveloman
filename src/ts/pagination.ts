@@ -32,10 +32,10 @@ export const pagination = (currentPage: number, data: IData) => {
 
   if (currentPage === 1) {
     markUp +=
-      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-left btn--disabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
+      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-left btn--disabled"><svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.839996 1.41L5.42 6L0.839996 10.59L2.25 12L8.25 6L2.25 0L0.839996 1.41Z" fill="#FAFAFA"/></svg></svg></button></li>';
   } else {
     markUp +=
-      '<li class="pag_item"><button type="button" class="pag_btn btn-left btn--enabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
+      '<li class="pag_item"><button type="button" class="pag_btn btn-left btn--enabled"><svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.839996 1.41L5.42 6L0.839996 10.59L2.25 12L8.25 6L2.25 0L0.839996 1.41Z" fill="#FAFAFA"/></svg></svg></button></li>';
   }
   if (currentPage > 1) {
     markUp +=
@@ -69,10 +69,10 @@ export const pagination = (currentPage: number, data: IData) => {
   }
   if (currentPage === pageCount) {
     markUp +=
-      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-right btn--disabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
+      '<li class="pag_item"><button type="button" disabled="true" class="pag_btn btn-right btn--disabled"><svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.839996 1.41L5.42 6L0.839996 10.59L2.25 12L8.25 6L2.25 0L0.839996 1.41Z" fill="#FAFAFA"/></svg></svg></button></li>';
   } else {
     markUp +=
-      '<li class="pag_item"><button type="button" class="pag_btn btn-right btn--enabled"><svg width="8" height="12"><use href="./src/images/sprite.svg#arrow"></use></svg></button></li>';
+      '<li class="pag_item"><button type="button" class="pag_btn btn-right btn--enabled"><svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.839996 1.41L5.42 6L0.839996 10.59L2.25 12L8.25 6L2.25 0L0.839996 1.41Z" fill="#FAFAFA"/></svg></svg></button></li>';
   }
   paginationBox.innerHTML = `<ul class="pag_list">${markUp}</ul>`;
 };
