@@ -73,6 +73,10 @@
 }
 
 .pag_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 7px 7px;
   border-radius: 4px;
   min-width: 32px;
@@ -92,8 +96,23 @@
 .btn--disabled {
   opacity: 0.5;
   border: none;
+  cursor: none;
+  pointer-events: none;
 }
 .btn--enabled {
   background: var(--second-bg-color);
   border: none;
+}
+
+.active-pag-btn {
+  border: 1px solid var(--second-bg-color);
+}
+
+.btn-left {
+  transform: rotate(180deg);
+}
+
+.btn-points {
+  cursor: none;
+  pointer-events: none;
 }
