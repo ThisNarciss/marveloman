@@ -23,7 +23,7 @@ Loading.init({
 
 axios.defaults.baseURL = VITE_BASE_API_URL;
 
-export const getFilteredComics = async (obj: SubmitData, page: number = 0) => {
+export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
   try {
     Loading.circle();
     const { textValue, formatValue, orderValue, dateValue } = obj;

@@ -106,7 +106,7 @@ export function modalMarkUp(data: IData) {
         </tbody>
       </table>
         <div class="creator_box">
-          <h2 class="description_title">Creator</h2>
+          <h2 class="description_title creator">Creator</h2>
           ${
             comic.writerInfo
               ? `<div class="creator_content"><img src="https${comic.writerInfo.avatar.path.slice(
@@ -122,8 +122,8 @@ export function modalMarkUp(data: IData) {
           }
           
         </div>
-        <div class="characters box">
-          <h2 class="description_title">Characters</h2>${
+        <div class="characters_box">
+          <h2 class="description_title character">Characters</h2>${
             comic.charactersInfo.length > 0
               ? `<ul class="characters_list">${characters}</ul>`
               : '<p class="description_text"> No characters info</p>'

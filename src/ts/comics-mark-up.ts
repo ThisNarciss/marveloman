@@ -27,7 +27,7 @@ export const createComicsMurkUp = (data: IData) => {
         <li class="comics_list_item">
         <article><img id=${
           item.id
-        }  class="last-comics_list_img" src="https${item.thumbnail.path.slice(
+        }  class="comics_list_img" src="https${item.thumbnail.path.slice(
               4
             )}/portrait_uncanny.${
               item.thumbnail.extension

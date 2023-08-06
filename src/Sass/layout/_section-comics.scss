@@ -10,6 +10,9 @@
 
 .comics_list_item {
   max-width: 332px;
+  height: 445px;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .comics_list_img {
@@ -18,6 +21,11 @@
   border-radius: 8px;
   cursor: pointer;
   pointer-events: all;
+  transition: transform var(--animation);
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
 }
 
 .comics_list_title {
