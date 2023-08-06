@@ -42,7 +42,10 @@
 
 .last-comics_list_item {
   display: block;
+  border-radius: 8px;
   width: 448px;
+  height: 519px;
+  overflow: hidden;
 }
 
 .last-comics_list_img {
@@ -53,6 +56,11 @@
   cursor: pointer;
   pointer-events: all;
   margin-bottom: 16px;
+  transition: transform var(--animation);
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
 }
 
 .last-comics_list_title {
