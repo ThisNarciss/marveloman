@@ -53,7 +53,8 @@ export const pagination = (currentPage: number, data: IData) => {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${beforeOnePage}</button></li>`;
   }
 
-  markUp += `<li class="pag_item"><button type="button" class="pag_btn active-pag-btn">${currentPage}</button></li>`;
+  markUp += `<li class="pag_item"><button disabled="true" type="button" class="pag_btn active-pag-btn ">${currentPage}</button></li>`;
+
   if (pageCount - 1 > currentPage) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${afterOnePage}</button></li>`;
   }

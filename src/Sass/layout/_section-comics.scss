@@ -10,9 +10,13 @@
 
 .comics_list_item {
   max-width: 332px;
+}
+
+.comics_poster-box {
   height: 445px;
   overflow: hidden;
   border-radius: 8px;
+  margin-bottom: 16px;
 }
 
 .comics_list_img {

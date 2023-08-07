@@ -9,17 +9,16 @@ function sliderLastComics() {
   const slidesContainer = slider.querySelector(
     '.last-comics_list-box_slides'
   ) as HTMLDivElement;
-  const slides = slider.querySelectorAll(
-    '.last-comics_list'
-  ) as NodeListOf<HTMLUListElement>;
 
   const lastComicsBtn = document.querySelectorAll(
     '.last-comics-btn_list_btn'
   ) as NodeListOf<HTMLButtonElement>;
 
-  const slidesContainerWidth = slides[0].offsetWidth;
-  const slidesCount = slides.length;
+  const slidesContainerWidth = slider.offsetWidth;
+  const allSlidesWidth = slidesContainer.offsetWidth;
+  const slidesCount = Math.round(allSlidesWidth / slidesContainerWidth);
 
+  let index = 0;
   let prevBtn: HTMLButtonElement | null = null;
 
   lastComicsBtn.forEach((btn, idx) => {
@@ -30,19 +29,40 @@ function sliderLastComics() {
       btn.style.color = 'rgba(250, 250, 250, 0.3)';
     }
     btn.addEventListener('click', () => {
-      if (prevBtn !== null) {
-        prevBtn.style.backgroundColor = 'var(--second-bg-color)';
-        prevBtn.style.border = 'none';
-        prevBtn.style.color = '#fafafa';
+      if (btn.classList.contains('slide-left') && index > 0) {
+        index -= 1;
+      }
+      if (
+        btn.classList.contains('slide-right') &&
+        index < 5 &&
+        index < slidesCount - 1
+      ) {
+        index += 1;
       }
 
-      btn.style.backgroundColor = '#0c0b0b';
-      btn.style.border = '1px solid rgba(250, 250, 250, 0.3)';
-      btn.style.color = 'rgba(250, 250, 250, 0.3)';
+      if (index > 0) {
+        lastComicsBtn[0].style.backgroundColor = 'var(--second-bg-color)';
+        lastComicsBtn[0].style.border = 'none';
+        lastComicsBtn[0].style.color = '#fafafa';
+      } else {
+        lastComicsBtn[idx].style.backgroundColor = '#0c0b0b';
+        lastComicsBtn[idx].style.border = '1px solid rgba(250, 250, 250, 0.3)';
+        lastComicsBtn[idx].style.color = 'rgba(250, 250, 250, 0.3)';
+      }
+
+      if (index < slidesCount - 1 && index < 5) {
+        lastComicsBtn[1].style.backgroundColor = 'var(--second-bg-color)';
+        lastComicsBtn[1].style.border = 'none';
+        lastComicsBtn[1].style.color = '#fafafa';
+      } else {
+        lastComicsBtn[idx].style.backgroundColor = '#0c0b0b';
+        lastComicsBtn[idx].style.border = '1px solid rgba(250, 250, 250, 0.3)';
+        lastComicsBtn[idx].style.color = 'rgba(250, 250, 250, 0.3)';
+      }
 
       prevBtn = btn;
       toSlide(
-        idx,
+        index,
         slidesCount,
         slidesContainerWidth,
         slidesContainer,

@@ -19,13 +19,13 @@ export const createLastComicsMurkUp = (data: IData) => {
   const murkUpArr = results.map(item => {
     return `
         <li class="last-comics_list_item">
-        <article><img id=${
+        <article><div class="last-comics_poster-box"><img id=${
           item.id
         }  class="last-comics_list_img" src="https${item.thumbnail.path.slice(
       4
     )}/portrait_uncanny.${
       item.thumbnail.extension
-    }" alt="comics article" loading="lazy" width="448" height="519">
+    }" alt="comics article" loading="lazy" width="448" height="519"></div>
         <h3 class="last-comics_list_title">${item.series.name}</h3>
         <p class="last-comics_list_text">${
           writer(item.creators.items)?.name ?? 'No info'

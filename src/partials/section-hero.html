@@ -11,90 +11,194 @@
       </p>
       <a class="hero_link" href="./comics.html">All comics</a>
     </div>
-    <ul class="hero_btn-list">
-      <li class="hero_btn-item">
-        <button class="hero_btn hero_btn-panther" type="button"></button>
-      </li>
-      <li class="hero_btn-item">
-        <button class="hero_btn hero_btn-hulk" type="button"></button>
-      </li>
-      <li class="hero_btn-item">
-        <button class="hero_btn hero_btn-spider" type="button"></button>
-      </li>
-    </ul>
+
     <div class="hero_pictures-box">
+      <ul class="hero_btn-list">
+        <li class="hero_btn-item">
+          <button class="hero_btn hero_btn-panther" type="button"></button>
+        </li>
+        <li class="hero_btn-item">
+          <button class="hero_btn hero_btn-hulk" type="button"></button>
+        </li>
+        <li class="hero_btn-item">
+          <button class="hero_btn hero_btn-spider" type="button"></button>
+        </li>
+      </ul>
       <div class="hero_img-box">
         <div class="img_slides">
           <div class="img_slide">
-            <img
-              class="character_img"
-              src="./src/images/desktop-black-panter1@1x.jpg"
-              alt="black panther"
-              width="352"
-              height="540"
-            />
+            <picture>
+              <source
+                srcset="
+                  ./src/images/desktop-black-panter1@1x.jpg 1x,
+                  ./src/images/desktop-black-panter1@2x.jpg 2x
+                "
+                media="(min-width: 1440px)" />
+              <source
+                srcset="
+                  ./src/images/tablet-black-panter1@1x.jpg 1x,
+                  ./src/images/tablet-black-panter1@2x.jpg 2x
+                "
+                media="(min-width: 768px)" />
+              <source
+                srcset="
+                  ./src/images/mobile-black-panter1@1x.jpg 1x,
+                  ./src/images/mobile-black-panter1@2x.jpg 2x
+                "
+                media="(max-width: 767px)" />
+              <img
+                class="character_img"
+                src="./src/images/desktop-black-panter1@1x.jpg"
+                alt="black panther"
+            /></picture>
           </div>
           <div class="img_slide">
-            <img
-              class="character_img"
-              src="./src/images/desktop-hulk1@1x.jpg"
-              alt="black panther"
-              width="352"
-              height="540"
-            />
+            <picture>
+              <source
+                srcset="
+                  ./src/images/desktop-hulk1@1x.jpg 1x,
+                  ./src/images/desktop-hulk1@2x.jpg 2x
+                "
+                media="(min-width: 1440px)" />
+              <source
+                srcset="
+                  ./src/images/tablet-hulk1@1x.jpg 1x,
+                  ./src/images/tablet-hulk1@2x.jpg 2x
+                "
+                media="(min-width: 768px)" />
+              <source
+                srcset="
+                  ./src/images/mobile-hulk1@1x.jpg 1x,
+                  ./src/images/mobile-hulk1@2x.jpg 2x
+                "
+                media="(max-width: 767px)" />
+              <img
+                class="character_img"
+                src="./src/images/desktop-hulk1@1x.jpg"
+                alt="hulk"
+            /></picture>
           </div>
           <div class="img_slide">
-            <img
-              class="character_img"
-              src="./src/images/desktop-spider-man1@1x.jpg"
-              alt="black panther"
-              width="352"
-              height="540"
-            />
+            <picture>
+              <source
+                srcset="
+                  ./src/images/desktop-spider-man1@1x.jpg 1x,
+                  ./src/images/desktop-spider-man1@2x.jpg 2x
+                "
+                media="(min-width: 1440px)" />
+              <source
+                srcset="
+                  ./src/images/tablet-spider-man1@1x.jpg 1x,
+                  ./src/images/tablet-spider-man1@2x.jpg 2x
+                "
+                media="(min-width: 768px)" />
+              <source
+                srcset="
+                  ./src/images/mobile-spider-man1@1x.jpg 1x,
+                  ./src/images/mobile-spider-man1@2x.jpg 2x
+                "
+                media="(max-width: 767px)" />
+              <img
+                class="character_img"
+                src="./src/images/desktop-spider-man1@1x.jpg"
+                alt="spider man"
+            /></picture>
           </div>
         </div>
       </div>
       <div class="character-blur_box">
         <div class="character-blur"></div>
         <div class="character_box">
-        <div class="character_slides">
-          <div class="character_slide">
-              <img
-                class="character_img"
-                src="./src/images/desktop-black-panter2@1x.jpg"
-                alt="black panther"
-                width="352"
-                height="540"
-              />
-          </div>
-          <div class="character_slide">
-              <img
-                class="character_img"
-                src="./src/images/desktop-hulk2@1x.jpg"
-                alt="black panther"
-                width="352"
-                height="540"
-              />
-          </div>
-          <div class="character_slide">
-              <img
-                class="character_img"
-                src="./src/images/desktop-spider-man2@1x.jpg"
-                alt="black panther"
-                width="352"
-                height="540"
-              />
+          <div class="character_slides">
+            <div class="character_slide">
+              <picture
+                ><source
+                  srcset="
+                    ./src/images/desktop-black-panter2@1x.jpg 1x,
+                    ./src/images/desktop-black-panter2@2x.jpg 2x
+                  "
+                  media="(min-width: 1440px)" />
+                <source
+                  srcset="
+                    ./src/images/tablet-black-panter2@1x.jpg 1x,
+                    ./src/images/tablet-black-panter2@2x.jpg 2x
+                  "
+                  media="(min-width: 768px)" />
+                <source
+                  srcset="
+                    ./src/images/mobile-black-panter2@1x.jpg 1x,
+                    ./src/images/mobile-black-panter2@2x.jpg 2x
+                  "
+                  media="(max-width: 767px)" />
+                <img
+                  class="character_img"
+                  src="./src/images/desktop-black-panter2@1x.jpg"
+                  alt="black panther"
+              /></picture>
+            </div>
+            <div class="character_slide">
+              <picture
+                ><source
+                  srcset="
+                    ./src/images/desktop-hulk2@1x.jpg 1x,
+                    ./src/images/desktop-hulk2@2x.jpg 2x
+                  "
+                  media="(min-width: 1440px)" />
+                <source
+                  srcset="
+                    ./src/images/tablet-hulk2@1x.jpg 1x,
+                    ./src/images/tablet-hulk2@2x.jpg 2x
+                  "
+                  media="(min-width: 768px)" />
+                <source
+                  srcset="
+                    ./src/images/mobile-hulk2@1x.jpg 1x,
+                    ./src/images/mobile-hulk2@2x.jpg 2x
+                  "
+                  media="(max-width: 767px)" />
+                <img
+                  class="character_img"
+                  src="./src/images/desktop-hulk2@1x.jpg"
+                  alt="hulk"
+              /></picture>
+            </div>
+            <div class="character_slide">
+              <picture
+                ><source
+                  srcset="
+                    ./src/images/desktop-spider-man2@1x.jpg 1x,
+                    ./src/images/desktop-spider-man2@2x.jpg 2x
+                  "
+                  media="(min-width: 1440px)" />
+                <source
+                  srcset="
+                    ./src/images/tablet-spider-man2@1x.jpg 1x,
+                    ./src/images/tablet-spider-man2@2x.jpg 2x
+                  "
+                  media="(min-width: 768px)" />
+                <source
+                  srcset="
+                    ./src/images/mobile-spider-man2@1x.jpg 1x,
+                    ./src/images/mobile-spider-man2@2x.jpg 2x
+                  "
+                  media="(max-width: 767px)" />
+                <img
+                  class="character_img"
+                  src="./src/images/desktop-spider-man2@1x.jpg"
+                  alt="spider man"
+              /></picture>
+            </div>
           </div>
         </div>
-      </div><div class="character_text-box">
-              <h3 class="character_title">Characters</h3>
-              <p class="character_text">
-                T’Challa is the king of the secretive and highly advanced
-                African nation of Wakanda - as well as the powerful warrior
-                known as the Black Panther.
-              </p>
-            </div>
-      
+        <div class="character_text-box">
+          <h3 class="character_title">Characters</h3>
+          <p class="character_text">
+            T’Challa is the king of the secretive and highly advanced African
+            nation of Wakanda - as well as the powerful warrior known as the
+            Black Panther.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
