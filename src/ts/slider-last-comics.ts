@@ -19,11 +19,9 @@ function sliderLastComics() {
   const slidesCount = Math.round(allSlidesWidth / slidesContainerWidth);
 
   let index = 0;
-  let prevBtn: HTMLButtonElement | null = null;
 
   lastComicsBtn.forEach((btn, idx) => {
     if (idx === 0) {
-      prevBtn = btn;
       btn.style.backgroundColor = '#0c0b0b';
       btn.style.border = '1px solid rgba(250, 250, 250, 0.3)';
       btn.style.color = 'rgba(250, 250, 250, 0.3)';
@@ -60,7 +58,6 @@ function sliderLastComics() {
         lastComicsBtn[idx].style.color = 'rgba(250, 250, 250, 0.3)';
       }
 
-      prevBtn = btn;
       toSlide(
         index,
         slidesCount,
