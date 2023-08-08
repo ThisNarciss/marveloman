@@ -32,10 +32,6 @@ function sliderHeroCharacterImg() {
   const characterText = document.querySelector(
     '.character_text'
   ) as HTMLParagraphElement;
-  console.log(sliderImg);
-  console.log(sliderCharacter);
-  console.log(slidesImg[0]);
-  console.log(slidesCharacter[0]);
 
   const slidesImgHeight = slidesImg[0].offsetHeight;
   const slidesCharacterHeight = slidesCharacter[0].offsetHeight;
@@ -43,8 +39,6 @@ function sliderHeroCharacterImg() {
   const slidesCharacterCount = slidesCharacter.length;
 
   let previousBtn: null | HTMLButtonElement = null;
-  console.log(slidesImgHeight, slidesImgCount);
-  console.log(slidesCharacterHeight, slidesCharacterCount);
 
   sliderBtn.forEach((btn, idx) => {
     if (idx === 0) {
@@ -52,8 +46,6 @@ function sliderHeroCharacterImg() {
       btn.style.backgroundColor = btnColor[idx];
     }
     btn.addEventListener('click', () => {
-      console.log(btn);
-
       if (previousBtn !== null) {
         previousBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
       }
