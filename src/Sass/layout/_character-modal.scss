@@ -4,7 +4,7 @@
 .character-comics_list {
   overflow: auto;
   display: flex;
-  gap: 16px;
+  gap: 32px;
   height: 252px;
   flex-wrap: wrap;
   &::-webkit-scrollbar {
@@ -18,13 +18,35 @@
 
     background-color: rgba(255, 255, 255, 0.068);
   }
+
+  @media screen and (min-width: 768px) {
+    gap: 19px;
+  }
+  @media screen and (min-width: 1440px) {
+    gap: 16px;
+  }
 }
 
 .character-comics_list_item {
-  flex-basis: calc((100% - 32px) / 3);
-  width: 174px;
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 38px) / 3);
+  }
+  @media screen and (min-width: 1440px) {
+    flex-basis: calc((100% - 32px) / 3);
+  }
+}
+
+.character-comics_list_img-box {
   overflow: hidden;
   border-radius: 8px;
+  height: 263px;
+  margin-bottom: 16px;
+  @media screen and (min-width: 768px) {
+    height: 200px;
+  }
+  @media screen and (min-width: 1440px) {
+    height: 200px;
+  }
 }
 
 .description_title--padding {
@@ -32,8 +54,8 @@
 }
 
 .character-comics_list_img {
-  width: 174px;
-  height: 200px;
+  width: 263px;
+  height: 263px;
   cursor: pointer;
   pointer-events: all;
   overflow: hidden;
@@ -43,6 +65,15 @@
   &:hover,
   &:focus {
     transform: scale(1.1);
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 155px;
+    height: 200px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 174px;
+    height: 200px;
   }
 }
 

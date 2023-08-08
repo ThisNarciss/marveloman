@@ -60,7 +60,6 @@ export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
     const {
       data: { data },
     } = await axios.get(comicsUrlSearch);
-    console.log(data);
 
     return data;
   } catch (error: any) {
@@ -68,13 +67,12 @@ export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
   }
 };
 
-listenMatchMedia('(max-width: 767px)');
-listenMatchMedia('(min-width: 768px)');
-listenMatchMedia('(max-width: 1439px)');
-listenMatchMedia('(min-width: 1440px)');
-
 if (location.pathname === '/comics.html') {
   getLocalComics();
+  listenMatchMedia('(max-width: 767px)');
+  listenMatchMedia('(min-width: 768px)');
+  listenMatchMedia('(max-width: 1439px)');
+  listenMatchMedia('(min-width: 1440px)');
 }
 
 export const getCharacter = async (id: string) => {
