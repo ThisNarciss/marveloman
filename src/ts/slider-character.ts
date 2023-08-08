@@ -39,6 +39,7 @@ function sliderHeroCharacterImg() {
   const slidesCharacterCount = slidesCharacter.length;
 
   let previousBtn: null | HTMLButtonElement = null;
+  console.log(slidesImgHeight, slidesImgCount);
 
   sliderBtn.forEach((btn, idx) => {
     if (idx === 0) {
