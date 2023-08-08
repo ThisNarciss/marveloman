@@ -14,16 +14,16 @@ function sliderHeroCharacterImg() {
   const sliderCharacter = document.querySelector(
     '.character_box'
   ) as HTMLDivElement;
-  const slidesImgContainer = sliderImg?.querySelector(
+  const slidesImgContainer = sliderImg.querySelector(
     '.img_slides'
   ) as HTMLDivElement;
-  const slidesCharacterContainer = sliderCharacter?.querySelector(
+  const slidesCharacterContainer = sliderCharacter.querySelector(
     '.character_slides'
   ) as HTMLDivElement;
-  const slidesImg = sliderImg?.querySelectorAll(
+  const slidesImg = sliderImg.querySelectorAll(
     '.img_slide'
   ) as NodeListOf<HTMLDivElement>;
-  const slidesCharacter = sliderCharacter?.querySelectorAll(
+  const slidesCharacter = sliderCharacter.querySelectorAll(
     '.character_slide'
   ) as NodeListOf<HTMLDivElement>;
   const sliderBtn = document.querySelectorAll(
