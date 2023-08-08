@@ -16,7 +16,7 @@
         </button>
       </div>
 
-      <label class="filter_form_label"
+      <label class="filter_form_label filter_form_label-format"
         >Format<select name="format" class="filter_form_select">
           <option class="filter_form_option" selected value="none">None</option>
           <option class="filter_form_option" value="comic">Comic</option>
@@ -39,15 +39,18 @@
           </option>
         </select></label
       >
-      <label class="filter_form_label"
+      <label class="filter_form_label filter_form_label-order"
         >Order by<select name="order" class="filter_form_select">
           <option selected value="none">None</option>
           <option value="title">Title</option>
           <option value="onsaleDate">On Sale Date</option>
         </select></label
       >
-      <label class="filter_form_label"
-        >Start Year<input type="date" name="date" class="filter_form_input"
+      <label class="filter_form_label filter_form_label-date"
+        >Start Year<input
+          type="date"
+          name="date"
+          class="filter_form_input filter_form_input-date"
       /></label>
     </form>
   </div>

@@ -6,8 +6,8 @@ import { Notify } from 'notiflix';
 import { urlChange } from '../utils/urlChange';
 import { CharacterItem, Item, SubmitData } from '../types/types';
 import author from '../utils/searchWriter';
-import { createComicsMurkUp } from '../comics-mark-up';
-import { pagination } from '../pagination';
+import { getLocalComics } from '../utils/getLocalComics';
+import { listenMatchMedia } from '../utils/listenMatchMedia';
 
 const TIME_STAMP = Date.now();
 const { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY, VITE_BASE_API_URL } = import.meta
@@ -24,11 +24,24 @@ Loading.init({
 axios.defaults.baseURL = VITE_BASE_API_URL;
 
 export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
+  Loading.circle();
   try {
-    Loading.circle();
+    const newWidth = window.innerWidth;
+    let pageLimit = 0;
+    if (newWidth <= 767) {
+      pageLimit = 4;
+    }
+    if (newWidth >= 768 && newWidth <= 1439) {
+      pageLimit = 8;
+    }
+
+    if (newWidth >= 1440) {
+      pageLimit = 16;
+    }
+
     const { textValue, formatValue, orderValue, dateValue } = obj;
 
-    let comicsUrlSearch = `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&limit=16&offset=${page}`;
+    let comicsUrlSearch = `/comics?ts=${TIME_STAMP}&apikey=${VITE_PUBLIC_KEY}&hash=${hash}&limit=${pageLimit}&offset=${page}`;
 
     if (textValue) {
       comicsUrlSearch += `&titleStartsWith=${textValue}`;
@@ -47,6 +60,7 @@ export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
     const {
       data: { data },
     } = await axios.get(comicsUrlSearch);
+    console.log(data);
 
     return data;
   } catch (error: any) {
@@ -54,22 +68,13 @@ export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
   }
 };
 
-if (location.pathname === '/comics.html') {
-  const searchComic = JSON.parse(
-    localStorage.getItem('searchComic') as string
-  ) || { textValue: '' };
+listenMatchMedia('(max-width: 767px)');
+listenMatchMedia('(min-width: 768px)');
+listenMatchMedia('(max-width: 1439px)');
+listenMatchMedia('(min-width: 1440px)');
 
-  if (searchComic) {
-    getFilteredComics(searchComic)
-      .then(data => {
-        createComicsMurkUp(data);
-        pagination(1, data);
-      })
-      .catch(error => {
-        Notify.failure(error);
-        Loading.remove();
-      });
-  }
+if (location.pathname === '/comics.html') {
+  getLocalComics();
 }
 
 export const getCharacter = async (id: string) => {

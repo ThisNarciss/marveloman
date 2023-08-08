@@ -22,7 +22,7 @@ export const pagination = (currentPage: number, data: IData) => {
     return;
   }
   let markUp = '';
-  const pageCount = Math.round(total / limit);
+  const pageCount = Math.ceil(total / limit);
 
   const beforeOnePage = currentPage - 1;
   const beforeTwoPage = currentPage - 2;
