@@ -40,6 +40,7 @@ function sliderHeroCharacterImg() {
 
   let previousBtn: null | HTMLButtonElement = null;
   console.log(slidesImgHeight, slidesImgCount);
+  console.log(slidesCharacterHeight, slidesCharacterCount);
 
   sliderBtn.forEach((btn, idx) => {
     if (idx === 0) {
@@ -47,6 +48,8 @@ function sliderHeroCharacterImg() {
       btn.style.backgroundColor = btnColor[idx];
     }
     btn.addEventListener('click', () => {
+      console.log(btn);
+
       if (previousBtn !== null) {
         previousBtn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
       }
