@@ -34,8 +34,8 @@ function sliderHeroCharacterImg() {
   ) as HTMLParagraphElement;
   console.log(sliderImg);
   console.log(sliderCharacter);
-  console.log(slidesImg);
-  console.log(slidesCharacter);
+  console.log(slidesImg[0]);
+  console.log(slidesCharacter[0]);
 
   const slidesImgHeight = slidesImg[0].offsetHeight;
   const slidesCharacterHeight = slidesCharacter[0].offsetHeight;
