@@ -286,3 +286,17 @@
 .character_slides {
   transition: transform var(--animation);
 }
+
+.img_slide {
+  height: 256px;
+  @media screen and (min-width: 768px) {
+    height: 540px;
+  }
+}
+
+.character_slide {
+  height: 256px;
+  @media screen and (min-width: 768px) {
+    height: 540px;
+  }
+}
