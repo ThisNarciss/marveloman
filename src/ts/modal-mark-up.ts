@@ -75,13 +75,11 @@ export function modalMarkUp(data: IData) {
         <div class="text_box">
         <div class="title-box"><h2 class="description_title">${
           comic.series.name
-        }</h2>${
+        }</h2>${`<p class="description_label">${
     comic.writerInfo
-      ? `<p class="description_label">${
-          comic.writerInfo.fullName
-        } | ${dateChanger(date)}</p>`
-      : ''
-  }</div>
+      ? `<span class="description_writer-name">${comic.writerInfo.fullName}</span>`
+      : 'No writer'
+  } | ${dateChanger(date)}</p>`}</div>
           
           <p class="description_text">${
             comic.description || 'No description info'

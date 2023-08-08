@@ -10,6 +10,10 @@
   visibility: visible;
   background-color: rgba(128, 128, 128, 0.2);
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   transition: opacity var(--animation), visibility var(--animation);
 
   &::-webkit-scrollbar {
@@ -34,13 +38,10 @@
 .modal {
   transition: transform var(--animation);
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1000px;
+  max-width: 335px;
   height: auto;
   overflow: auto;
-  padding: 64px 32px;
+  padding: 40px 20px;
   border-radius: 8px;
   background-color: var(--default-bg-color);
 
@@ -55,6 +56,14 @@
 
     background-color: rgba(255, 255, 255, 0.068);
   }
+
+  @media screen and (min-width: 768px) {
+    padding: 64px 32px;
+    max-width: 704px;
+  }
+  @media screen and (min-width: 1440px) {
+    max-width: 1000px;
+  }
 }
 
 .is-hidden.modal {
@@ -68,8 +77,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   color: var(--default-text-color);
   fill: currentColor;
   stroke: currentColor;
@@ -79,6 +88,10 @@
   :focus {
     color: var(--second-bg-color);
   }
+  @media screen and (min-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .modal_btn_close-icon {
@@ -87,22 +100,46 @@
 
 .modal_box {
   display: flex;
+  flex-direction: column;
   gap: 16px;
+
+  @media screen and (min-width: 1440px) {
+    flex-direction: row;
+  }
+}
+
+.comics_images_box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+  @media screen and (min-width: 1440px) {
+    flex-direction: column;
+  }
 }
 
 .comics_cover {
-  display: block;
-  margin-bottom: 8px;
-
-  width: 332px;
-  height: 445px;
+  width: 295px;
+  height: 387px;
   border-radius: 8px;
+  @media screen and (min-width: 768px) {
+    width: 332px;
+    height: 445px;
+  }
 }
 
 .gallery_list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+  }
+  @media screen and (min-width: 1440px) {
+    flex-direction: row;
+  }
 }
 
 .gallery_item {
@@ -123,16 +160,30 @@
   align-self: flex-start;
   gap: 32px;
   padding: 32px 16px;
-  width: 588px;
+  width: 295px;
   border-radius: 8px;
   background-color: #171717;
+  @media screen and (min-width: 768px) {
+    width: 536px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 588px;
+  }
 }
 
 .title-box {
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 16px;
+  gap: 4px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+  }
+  @media screen and (min-width: 1440px) {
+  }
 }
 
 .description_label {
@@ -140,32 +191,55 @@
   font-size: 14px;
   line-height: 1.29;
 }
+
+.description_writer-name {
+  font-size: 14px;
+  line-height: 1.29;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.13;
+  }
+}
+
 .description_title {
   color: var(--default-text-color);
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.48px;
-  max-width: 330px;
+  line-height: 1.33;
+  letter-spacing: -0.36px;
+  max-width: 300px;
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+
+    line-height: 1;
+    letter-spacing: -0.48px;
+  }
 }
 
 .creator,
 .character {
-  margin-bottom: 32px;
+  margin-bottom: 20px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 32px;
+  }
 }
 
 .description_table {
-  width: 320px;
+  max-width: 320px;
 }
 
 .description_table_head {
   color: rgba(250, 250, 250, 0.5);
-  font-size: 12px;
+  font-size: 10px;
   text-align: start;
   font-weight: 400;
-  line-height: 1.17;
+  line-height: 1.2;
   text-transform: uppercase;
   width: 20%;
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+    line-height: 1.17;
+  }
 }
 
 .description_table_head:nth-child(2) {
@@ -174,28 +248,41 @@
 
 .description_table_data {
   color: var(--default-text-color);
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.13;
+  line-height: 1.29;
   vertical-align: baseline;
   width: 20%;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.13;
+  }
 }
 
 .creator_content {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
+
+  @media screen and (min-width: 768px) {
+    gap: 14px;
+  }
 }
 
 .creator_avatar,
 .character_avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 8px;
   overflow: hidden;
   object-fit: cover;
   object-position: right top;
+
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .character_avatar {
@@ -206,28 +293,39 @@
 .creator-info_box {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
+  @media screen and (min-width: 768px) {
+    gap: 8px;
+  }
 }
 
 .creator_text {
   color: rgba(250, 250, 250, 0.5);
-  font-size: 12px;
-  line-height: 1.17;
+  font-size: 10px;
+  line-height: 1.2;
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+    line-height: 1.17;
+  }
 }
 
 .creator_name {
   color: var(--default-text-color);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.13;
+  line-height: 1.29;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.13;
+  }
 }
 
 .characters_list {
   display: flex;
   gap: 15px;
-  flex-wrap: wrap;
 
-  max-height: 210px;
+  flex-direction: column;
+  max-height: 310px;
   overflow: auto;
 
   &::-webkit-scrollbar {
@@ -241,13 +339,27 @@
 
     background-color: rgba(255, 255, 255, 0.068);
   }
+  @media screen and (min-width: 768px) {
+    max-height: 210px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
 .characters_item {
   display: flex;
   align-items: center;
-  flex-basis: calc((100% - 30px) / 3);
+
   gap: 8px;
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 30%) / 2);
+    gap: 16px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    flex-basis: calc((100% - 30px) / 3);
+    gap: 8px;
+  }
 }
 
 .characters_name {

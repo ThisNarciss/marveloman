@@ -33,14 +33,14 @@
 
 .last-comics_list-box {
   display: flex;
-  width: 355px;
+  max-width: 355px;
   overflow: hidden;
   margin-bottom: 32px;
   @media screen and (min-width: 768px) {
-    width: 704px;
+    max-width: 704px;
   }
   @media screen and (min-width: 1440px) {
-    width: 1376px;
+    max-width: 1376px;
   }
 }
 .last-comics_list-box_slides {

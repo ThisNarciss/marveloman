@@ -3,13 +3,12 @@
 }
 
 .footer_list {
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 5fr 1fr;
   padding: 40px 0;
   gap: 20px;
+  align-items: center;
+  justify-content: space-between;
   @media screen and (min-width: 768px) {
     display: flex;
     align-items: center;
@@ -24,7 +23,7 @@
 }
 
 .footer_list_item {
-  flex-basis: calc((100%) / 2);
+  align-items: center;
 }
 
 .footer_list_item_link {

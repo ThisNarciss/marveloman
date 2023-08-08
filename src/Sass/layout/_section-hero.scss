@@ -14,9 +14,6 @@
 }
 
 .hero-container {
-  @media screen and (min-width: 768px) {
-  }
-
   @media screen and (min-width: 1440px) {
     display: flex;
     gap: 65px;
@@ -30,7 +27,7 @@
   height: auto;
   margin-bottom: 40px;
   @media screen and (min-width: 768px) {
-    margin-bottom: 111px;
+    margin-bottom: 32px;
   }
   @media screen and (min-width: 1440px) {
     margin-bottom: 0;
@@ -97,7 +94,6 @@
 .hero_btn-list {
   transform: rotateZ(-90deg);
 
-  // grid-row: 3;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 3;
@@ -157,57 +153,53 @@
   height: 256px;
   overflow: hidden;
   grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  align-self: self-start;
 
   @media screen and (min-width: 768px) {
+    align-self: flex-end;
     height: 540px;
   }
 
   @media screen and (min-width: 1440px) {
     height: 540px;
+    align-self: center;
   }
 }
 .character_img {
   border-radius: 8px;
   overflow: hidden;
-  height: 256px;
-
-  @media screen and (min-width: 768px) {
-    height: 540px;
-  }
-
-  @media screen and (min-width: 1440px) {
-    height: 540px;
-  }
 }
 
 .character_box {
   position: relative;
-  left: 0;
+
   height: 256px;
   overflow: hidden;
 
   @media screen and (min-width: 768px) {
-    left: 0;
-    bottom: 80px;
     height: 540px;
-    margin-left: 0;
   }
 
   @media screen and (min-width: 1440px) {
     bottom: 200px;
     left: 32px;
     height: 540px;
-    margin-left: 0;
   }
 }
 
 .character-blur_box {
   position: relative;
   grid-row: 2;
-  margin-left: 145px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-left: auto;
   @media screen and (min-width: 768px) {
     grid-row: 1;
     margin-left: 0;
+    grid-column-start: 2;
+    grid-column-end: 2;
   }
 }
 
@@ -246,7 +238,6 @@
 
   margin-top: 14px;
   @media screen and (min-width: 768px) {
-    position: absolute;
     bottom: -10px;
     width: 336px;
     gap: 52px;
@@ -255,6 +246,7 @@
   }
 
   @media screen and (min-width: 1440px) {
+    position: absolute;
     bottom: 80px;
     width: 320px;
     gap: 59px;
