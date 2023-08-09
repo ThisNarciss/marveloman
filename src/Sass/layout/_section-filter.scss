@@ -23,20 +23,22 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-
   color: rgba(250, 250, 250, 0.3);
   line-height: 1.29;
   &-format {
+    position: relative;
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row: 2;
   }
   &-order {
+    position: relative;
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row: 2;
   }
   &-date {
+    position: relative;
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row: 3;
@@ -53,11 +55,14 @@
   border-radius: 100px;
   border: 2px solid var(--second-bg-color);
   background: #171717;
-
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
   color: var(--default-text-color);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.13;
+  line-height: 1.29;
   &-search {
     background-color: var(--second-bg-color);
     width: 100%;
@@ -70,12 +75,39 @@
   }
   &-search::placeholder {
     color: var(--default-text-color);
-    font-size: 16px;
-    line-height: 1.13;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.29;
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+
+      line-height: 1.13;
+      padding: 16px 24px;
+    }
   }
 
   @media screen and (min-width: 768px) {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.13;
     padding: 16px 24px;
+  }
+}
+
+.filter_form_label-format,
+.filter_form_label-order,
+.filter_form_label-date {
+  &::after {
+    content: '\25BC';
+    display: block;
+    color: var(--default-text-color);
+
+    position: absolute;
+    bottom: 30%;
+    right: 24px;
+    transform: translateY(30%);
+    pointer-events: none;
+    cursor: pointer;
   }
 }
 
@@ -90,4 +122,12 @@
   position: absolute;
   top: 50%;
   right: 24px;
+}
+
+.filter_form_input-date::after {
+  content: '' attr(value);
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 5px;
+  /* Додаткові стилі за бажанням */
 }

@@ -21,7 +21,7 @@ function handleSubmit(e: Event) {
     selectFormatEl.value !== 'none' ? selectFormatEl.value : '';
   const orderValue: string =
     selectOrderEl.value !== 'none' ? selectOrderEl.value : '';
-  const dateValue: string = inputDateEl.value.slice(0, 4);
+  const dateValue: string = inputDateEl.value.slice(6);
 
   const data: SubmitData = { textValue, formatValue, orderValue, dateValue };
   localStorage.setItem('searchComic', JSON.stringify(data));
