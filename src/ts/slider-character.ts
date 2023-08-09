@@ -2,8 +2,8 @@ import { toSlide } from './utils/slider';
 
 document.addEventListener('DOMContentLoaded', sliderHeroCharacterImg);
 
-const btnColor = ['#34387f', '#5b7f3c', '#600404'];
-const charText = [
+const BTN_COLOR = ['#34387f', '#5b7f3c', '#600404'];
+const CHARACTER_TEXT = [
   'T’Challa is the king of the secretive and highly advanced African nation of Wakanda - as well as the powerful warrior known as the Black Panther.',
   'Exposed to heavy doses of gamma radiation, scientist Bruce Banner transforms into the mean, green rage machine called the Hulk.',
   'With amazing spider-like abilities, teenage science whiz Peter Parker fights crime and dreams of becoming an Avenger as Spider-Man.',
@@ -43,7 +43,7 @@ function sliderHeroCharacterImg() {
   sliderBtn.forEach((btn, idx) => {
     if (idx === 0) {
       previousBtn = btn;
-      btn.style.backgroundColor = btnColor[idx];
+      btn.style.backgroundColor = BTN_COLOR[idx];
     }
     btn.addEventListener('click', () => {
       if (previousBtn !== null) {
@@ -63,17 +63,17 @@ function sliderHeroCharacterImg() {
         slidesCharacterContainer,
         'translateY'
       );
-      btn.style.backgroundColor = btnColor[idx];
-      characterText.textContent = charText[idx];
+      btn.style.backgroundColor = BTN_COLOR[idx];
+      characterText.textContent = CHARACTER_TEXT[idx];
 
       document.documentElement.style.setProperty(
         '--second-bg-color',
-        btnColor[idx]
+        BTN_COLOR[idx]
       );
 
       previousBtn = btn;
 
-      if (!btnColor[idx]) {
+      if (!BTN_COLOR[idx]) {
         btn.style.backgroundColor = 'rgba(23, 23, 23, 0.8)';
       }
     });
