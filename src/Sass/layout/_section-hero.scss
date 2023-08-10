@@ -80,15 +80,27 @@
 }
 
 .hero_link {
-  max-width: 131px;
+  max-width: 112px;
   background-color: var(--second-bg-color);
   border-radius: 1000px;
-  padding: 12px 24px;
+  padding: 10px 20px;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 1.29;
+  line-height: 1.33;
   text-transform: uppercase;
   color: var(--default-text-color);
-  transition: background-color var(--animation);
+  transition: background-color var(--animation), opacity var(--animation);
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+    line-height: 1.29;
+    padding: 12px 24px;
+    max-width: 131px;
+  }
 }
 
 .hero_btn-list {

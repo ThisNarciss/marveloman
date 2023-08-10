@@ -30,6 +30,11 @@
   font-size: 16px;
   line-height: 1.13;
   color: var(--default-text-color);
+  transition: color var(--animation);
+  &:hover,
+  &:focus {
+    color: var(--second-bg-color);
+  }
 }
 
 .logo_icon {
@@ -56,6 +61,11 @@
   height: 40px;
   border-radius: 6px;
   border: 1px solid rgba(250, 250, 250, 0.15);
+  transition: background-color var(--animation);
+  &:hover,
+  &:focus {
+    background-color: var(--second-bg-color);
+  }
 }
 .social-links_list_item_link {
   display: flex;

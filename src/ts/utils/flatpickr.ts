@@ -5,5 +5,6 @@ const inputElement = document.querySelector(
 ) as HTMLInputElement;
 
 flatpickr(inputElement, {
+  defaultDate: new Date(),
   dateFormat: 'd/m/Y',
 });

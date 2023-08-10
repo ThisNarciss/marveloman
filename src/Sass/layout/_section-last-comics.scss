@@ -153,4 +153,9 @@
   &.slide-right {
     transform: rotateZ(180deg);
   }
+  transition: opacity var(--animation);
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
 }

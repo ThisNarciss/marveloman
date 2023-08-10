@@ -9,12 +9,12 @@
   row-gap: 12px;
   column-gap: 8px;
   @media screen and (min-width: 768px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 8px;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
   }
   @media screen and (min-width: 1440px) {
+    margin-inline: auto;
+    width: 927px;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     column-gap: 16px;
   }
 }
@@ -25,23 +25,39 @@
   gap: 8px;
   color: rgba(250, 250, 250, 0.3);
   line-height: 1.29;
+
   &-format {
     position: relative;
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row: 2;
+    @media screen and (min-width: 768px) {
+      grid-column-start: 2;
+      grid-column-end: 2;
+      grid-row: 1;
+    }
   }
   &-order {
     position: relative;
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row: 2;
+    @media screen and (min-width: 768px) {
+      grid-column-start: 3;
+      grid-column-end: 3;
+      grid-row: 1;
+    }
   }
   &-date {
     position: relative;
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row: 3;
+    @media screen and (min-width: 768px) {
+      grid-column-start: 4;
+      grid-column-end: 4;
+      grid-row: 1;
+    }
   }
 }
 
@@ -65,13 +81,7 @@
   line-height: 1.29;
   &-search {
     background-color: var(--second-bg-color);
-    width: 100%;
-    @media screen and (min-width: 768px) {
-      width: 195px;
-    }
-    @media screen and (min-width: 1440px) {
-      width: 360px;
-    }
+    cursor: text;
   }
   &-search::placeholder {
     color: var(--default-text-color);
@@ -116,18 +126,15 @@
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row: 1;
+  @media screen and (min-width: 768px) {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row: 1;
+  }
 }
 
 .filter_form_btn {
   position: absolute;
   top: 50%;
   right: 24px;
-}
-
-.filter_form_input-date::after {
-  content: '' attr(value);
-  display: inline-block;
-  font-size: 14px;
-  margin-top: 5px;
-  /* Додаткові стилі за бажанням */
 }

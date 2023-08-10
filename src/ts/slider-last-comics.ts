@@ -25,6 +25,7 @@ function sliderLastComics() {
       btn.style.backgroundColor = '#0c0b0b';
       btn.style.border = '1px solid rgba(250, 250, 250, 0.3)';
       btn.style.color = 'rgba(250, 250, 250, 0.3)';
+      btn.style.pointerEvents = 'none';
     }
     btn.addEventListener('click', () => {
       if (btn.classList.contains('slide-left') && index > 0) {
@@ -42,20 +43,24 @@ function sliderLastComics() {
         lastComicsBtn[0].style.backgroundColor = 'var(--second-bg-color)';
         lastComicsBtn[0].style.border = 'none';
         lastComicsBtn[0].style.color = '#fafafa';
+        lastComicsBtn[0].style.pointerEvents = 'all';
       } else {
         lastComicsBtn[idx].style.backgroundColor = '#0c0b0b';
         lastComicsBtn[idx].style.border = '1px solid rgba(250, 250, 250, 0.3)';
         lastComicsBtn[idx].style.color = 'rgba(250, 250, 250, 0.3)';
+        lastComicsBtn[0].style.pointerEvents = 'none';
       }
 
       if (index < slidesCount - 1 && index < 5) {
         lastComicsBtn[1].style.backgroundColor = 'var(--second-bg-color)';
         lastComicsBtn[1].style.border = 'none';
         lastComicsBtn[1].style.color = '#fafafa';
+        lastComicsBtn[1].style.pointerEvents = 'all';
       } else {
         lastComicsBtn[idx].style.backgroundColor = '#0c0b0b';
         lastComicsBtn[idx].style.border = '1px solid rgba(250, 250, 250, 0.3)';
         lastComicsBtn[idx].style.color = 'rgba(250, 250, 250, 0.3)';
+        lastComicsBtn[1].style.pointerEvents = 'none';
       }
 
       toSlide(
