@@ -17,7 +17,7 @@ export const pagination = (currentPage: number, data: IData) => {
 
   const { limit, total } = data;
 
-  if (total === 0) {
+  if (total < limit) {
     paginationBox.innerHTML = '';
     return;
   }
@@ -41,11 +41,11 @@ export const pagination = (currentPage: number, data: IData) => {
     markUp +=
       '<li class="pag_item"><button type="button" class="pag_btn">1</button></li>';
   }
-  if (currentPage > 3) {
+  if (currentPage > 3 && pageCount > 4) {
     markUp +=
       '<li class="pag_item"><button type="button" class="pag_btn btn-points">...</button></li>';
   }
-  if (currentPage === pageCount) {
+  if (currentPage === pageCount && pageCount > 2) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${beforeTwoPage}</button></li>`;
   }
 
@@ -58,11 +58,11 @@ export const pagination = (currentPage: number, data: IData) => {
   if (pageCount - 1 > currentPage) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${afterOnePage}</button></li>`;
   }
-  if (currentPage === 1) {
+  if (currentPage === 1 && pageCount > 2) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn">${afterTwoPage}</button></li>`;
   }
 
-  if (pageCount - 2 > currentPage) {
+  if (pageCount - 2 > currentPage && pageCount > 4) {
     markUp += `<li class="pag_item"><button type="button" class="pag_btn btn-points">...</button></li>`;
   }
   if (pageCount > currentPage) {

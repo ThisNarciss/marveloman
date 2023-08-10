@@ -13,7 +13,12 @@ modalBtn.addEventListener('click', oncloseModal);
 modal.addEventListener('click', onBackdropClick);
 
 export function onOpenModal(e: MouseEvent) {
-  const { id } = e.target as HTMLElement;
+  const { id, nodeName } = e.target as HTMLElement;
+
+  if (nodeName !== 'IMG') {
+    return;
+  }
+
   window.addEventListener('keydown', onEscKeyPress);
   modalModifier(id);
 }

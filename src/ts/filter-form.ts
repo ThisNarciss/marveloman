@@ -34,4 +34,5 @@ function handleSubmit(e: Event) {
       Notify.failure(error);
       Loading.remove();
     });
+  form.reset();
 }
