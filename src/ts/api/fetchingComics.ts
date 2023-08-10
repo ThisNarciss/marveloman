@@ -5,7 +5,7 @@ import { createLastComicsMurkUp } from '../comics-last-week-mark-up';
 import { Notify } from 'notiflix';
 import { urlChange } from '../utils/urlChange';
 import { CharacterItem, Item, SubmitData } from '../types/types';
-import author from '../utils/searchWriter';
+import author from '../utils/searchData';
 import { getLocalComics } from '../utils/getLocalComics';
 import { listenMatchMedia } from '../utils/listenMatchMedia';
 
@@ -66,14 +66,6 @@ export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
     return error.message;
   }
 };
-
-if (location.pathname === '/comics.html') {
-  getLocalComics();
-  listenMatchMedia('(max-width: 767px)');
-  listenMatchMedia('(min-width: 768px)');
-  listenMatchMedia('(max-width: 1439px)');
-  listenMatchMedia('(min-width: 1440px)');
-}
 
 export const getCharacter = async (id: string) => {
   try {
@@ -227,3 +219,11 @@ export const searchComics = async (str: string) => {
     return error.message;
   }
 };
+
+if (location.pathname === '/comics.html') {
+  getLocalComics();
+  listenMatchMedia('(max-width: 767px)');
+  listenMatchMedia('(min-width: 768px)');
+  listenMatchMedia('(max-width: 1439px)');
+  listenMatchMedia('(min-width: 1440px)');
+}

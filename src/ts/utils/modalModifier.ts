@@ -10,45 +10,46 @@ import { modalMarkUp } from '../modal-mark-up';
 
 const modal = document.querySelector('.backdrop') as HTMLDivElement;
 
-export const modalModifier = (id: string) => {
-  getOneComics(id)
-    .then(data => {
-      modalMarkUp(data);
-      modal.classList.remove('is-hidden');
-      document.body.style.overflow = 'hidden';
-      const galleryImg = document.querySelectorAll(
-        '.gallery_img'
-      ) as NodeListOf<HTMLImageElement>;
-      const characterImg = document.querySelectorAll(
-        '.character_avatar'
-      ) as NodeListOf<HTMLImageElement>;
+export const modalModifier = async (id: string) => {
+  try {
+    const oneComicData = await getOneComics(id);
+    modalMarkUp(oneComicData);
+    modal.classList.remove('is-hidden');
+    document.body.style.overflow = 'hidden';
 
-      characterImg.forEach(img =>
-        img.addEventListener('click', async (e: MouseEvent) => {
-          const { id } = e.target as HTMLImageElement;
+    const galleryImg = document.querySelectorAll(
+      '.gallery_img'
+    ) as NodeListOf<HTMLImageElement>;
+    const characterImg = document.querySelectorAll(
+      '.character_avatar'
+    ) as NodeListOf<HTMLImageElement>;
 
-          const data = await getCharacter(id);
-          const comics = await getCharacterComics(data.comics.collectionURI);
-          characterMarkUp(data, comics);
+    characterImg.forEach(img =>
+      img.addEventListener('click', async (e: MouseEvent) => {
+        const { id } = e.target as HTMLImageElement;
 
-          const comicImg = document.querySelectorAll(
-            '.character-comics_list_img'
-          ) as NodeListOf<HTMLImageElement>;
-          comicImg.forEach(img =>
-            img.addEventListener('click', (e: MouseEvent) => {
-              const { id } = e.target as HTMLImageElement;
-              modalModifier(id);
-            })
-          );
-        })
-      );
+        const data = await getCharacter(id);
+        const comics = await getCharacterComics(data.comics.collectionURI);
+        characterMarkUp(data, comics);
 
-      galleryImg.forEach(img =>
-        img.addEventListener('click', onGalleryModalOpen)
-      );
-    })
-    .catch(error => {
-      Notify.failure(error);
-      Loading.remove();
-    });
+        const comicImg = document.querySelectorAll(
+          '.character-comics_list_img'
+        ) as NodeListOf<HTMLImageElement>;
+
+        comicImg.forEach(img =>
+          img.addEventListener('click', (e: MouseEvent) => {
+            const { id } = e.target as HTMLImageElement;
+            modalModifier(id);
+          })
+        );
+      })
+    );
+
+    galleryImg.forEach(img =>
+      img.addEventListener('click', onGalleryModalOpen)
+    );
+  } catch (error: any) {
+    Notify.failure(error);
+    Loading.remove();
+  }
 };

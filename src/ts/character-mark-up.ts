@@ -1,7 +1,7 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { CharacterData, LastComicItem } from './types/types';
 import { dateChanger } from './utils/dateChanger';
-import writer from './utils/searchWriter';
+import writer from './utils/searchData';
 
 const modalBoxRef = document.querySelector('.modal_box') as HTMLDivElement;
 

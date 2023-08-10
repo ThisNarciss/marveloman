@@ -1,6 +1,6 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { LastComicItem } from './types/types';
-import writer from './utils/searchWriter';
+import writer from './utils/searchData';
 import { onOpenModal } from './modal';
 
 const comicsBox = document.querySelector('.comics-box') as HTMLDivElement;

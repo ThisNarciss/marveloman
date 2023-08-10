@@ -1,6 +1,8 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Item } from './types/types';
 import { dateChanger } from './utils/dateChanger';
+import { nameSlice } from './utils/char-name-slice';
+import { date, price } from './utils/searchData';
 
 const modalBoxRef = document.querySelector('.modal_box') as HTMLDivElement;
 
@@ -12,10 +14,6 @@ export function modalMarkUp(data: IData) {
   const { results } = data;
   const comic = results[0];
   modalBoxRef.innerHTML = '';
-
-  const price = comic.prices.find(item => item.type === 'printPrice')?.price;
-
-  const date = comic.dates.find(item => item.type === 'onsaleDate')?.date;
 
   const gallery = comic.images
     .map(
@@ -31,14 +29,6 @@ export function modalMarkUp(data: IData) {
           </li>`
     )
     .join('');
-
-  const nameSlice = (name: string) => {
-    const idx = name.indexOf('(');
-    if (idx === -1) {
-      return name;
-    }
-    return name.slice(0, idx);
-  };
 
   const characters = comic.charactersInfo
     .map(
@@ -79,7 +69,7 @@ export function modalMarkUp(data: IData) {
     comic.writerInfo
       ? `<span class="description_writer-name">${comic.writerInfo.fullName}</span>`
       : 'No writer'
-  } | ${dateChanger(date)}</p>`}</div>
+  } | ${dateChanger(date(comic.dates))}</p>`}</div>
           
           <p class="description_text">${
             comic.description || 'No description info'
@@ -97,9 +87,12 @@ export function modalMarkUp(data: IData) {
         <tbody>
         <tr class="description_table_row">
           <td class="description_table_data">${comic.format}</td>
-          <td class="description_table_data">${date?.slice(0, 4)}</td>
+          <td class="description_table_data">${date(comic.dates)?.slice(
+            0,
+            4
+          )}</td>
           <td class="description_table_data">${comic.pageCount}</td>
-          <td class="description_table_data">$${price}</td>
+          <td class="description_table_data">$${price(comic.prices)}</td>
         </tr>
         </tbody>
       </table>

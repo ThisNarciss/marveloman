@@ -132,11 +132,16 @@
   align-items: center;
   justify-content: center;
 
-  height: 609px;
-  width: 448px;
+  height: 440px;
+  width: 323px;
   animation: skeleton 1000ms linear infinite alternate;
   color: rgba(250, 250, 250, 0.5);
   fill: currentColor;
+
+  @media screen and (min-width: 768px) {
+    width: 448px;
+    height: 609px;
+  }
 }
 
 .last-comics-btn_list_btn {
