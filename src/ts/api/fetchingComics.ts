@@ -8,6 +8,8 @@ import { CharacterItem, Item, SubmitData } from '../types/types';
 import author from '../utils/searchData';
 import { getLocalComics } from '../utils/getLocalComics';
 import { listenMatchMedia } from '../utils/listenMatchMedia';
+import { getPageLimit } from '../utils/get-page-limit';
+import { preloader } from '../utils/preloader';
 
 const TIME_STAMP = Date.now();
 const { VITE_PRIVATE_KEY, VITE_PUBLIC_KEY, VITE_BASE_API_URL } = import.meta
@@ -24,20 +26,10 @@ Loading.init({
 axios.defaults.baseURL = VITE_BASE_API_URL;
 
 export const getFilteredComics = async (obj: SubmitData, page: number = 1) => {
-  Loading.circle();
   try {
-    const newWidth = window.innerWidth;
-    let pageLimit = 0;
-    if (newWidth <= 767) {
-      pageLimit = 4;
-    }
-    if (newWidth >= 768 && newWidth <= 1439) {
-      pageLimit = 8;
-    }
-
-    if (newWidth >= 1440) {
-      pageLimit = 16;
-    }
+    const pageLimit = getPageLimit();
+    Loading.circle();
+    preloader(pageLimit);
 
     const { textValue, formatValue, orderValue, dateValue } = obj;
 
@@ -115,14 +107,6 @@ const getComicsLastWeek = async () => {
   }
 };
 
-if (location.pathname !== '/comics.html') {
-  localStorage.setItem('searchComic', JSON.stringify({ textValue: '' }));
-  getComicsLastWeek().catch(error => {
-    Notify.failure(error);
-    Loading.remove();
-  });
-}
-
 export const getOneComics = async (id: string) => {
   try {
     Loading.circle();
@@ -163,7 +147,7 @@ export const getOneComics = async (id: string) => {
 
     const writer = author(creators.items);
 
-    let writerInfo: {} | undefined = {};
+    let writerInfo: {} | string = {};
 
     if (writer) {
       const {
@@ -219,6 +203,14 @@ export const searchComics = async (str: string) => {
     return error.message;
   }
 };
+
+if (location.pathname !== '/comics.html') {
+  localStorage.setItem('searchComic', JSON.stringify({ textValue: '' }));
+  getComicsLastWeek().catch(error => {
+    Notify.failure(error);
+    Loading.remove();
+  });
+}
 
 if (location.pathname === '/comics.html') {
   getLocalComics();

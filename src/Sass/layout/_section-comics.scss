@@ -183,3 +183,38 @@
   cursor: none;
   pointer-events: none;
 }
+
+.comics-skeleton_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  @media screen and (min-width: 768px) {
+    gap: 32px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    gap: 64px 16px;
+  }
+}
+
+.comics-skeleton_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 338px;
+  height: 453px;
+  animation: skeleton 1000ms linear infinite alternate;
+  color: rgba(250, 250, 250, 0.5);
+  fill: currentColor;
+
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 32px) / 2);
+    height: 457px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    flex-basis: calc((100% - 48px) / 4);
+    height: 445px;
+  }
+}

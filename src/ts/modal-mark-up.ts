@@ -1,8 +1,9 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Item } from './types/types';
 import { dateChanger } from './utils/dateChanger';
-import { nameSlice } from './utils/char-name-slice';
 import { date, price } from './utils/searchData';
+import { createComicGalleryMarkUp } from '../templates/comic-gallery';
+import { createComicCharacterMarkUp } from '../templates/comic-character';
 
 const modalBoxRef = document.querySelector('.modal_box') as HTMLDivElement;
 
@@ -15,33 +16,10 @@ export function modalMarkUp(data: IData) {
   const comic = results[0];
   modalBoxRef.innerHTML = '';
 
-  const gallery = comic.images
-    .map(
-      img => `<li class="gallery_item"><img
-      id="https${img.path.slice(4)}"
-          class="gallery_img"
-          src="https${img.path.slice(4)}/portrait_uncanny.${img.extension}"
-          alt="comics cover"
-          width="100"
-          height="150"
-          loading="lazy"
-        />
-          </li>`
-    )
-    .join('');
+  const gallery = comic.images.map(createComicGalleryMarkUp).join('');
 
   const characters = comic.charactersInfo
-    .map(
-      char =>
-        `<li  class='characters_item'><img id="${
-          char.id
-        }" src="https${char.thumbnail.path.slice(4)}/portrait_medium.${
-          char.thumbnail.extension
-        }" alt="creator avatar" class="character_avatar" loading="lazy" width="60"
-          height="60"/><h3 class="characters_name">${nameSlice(
-            char.name
-          )}</h3></li>`
-    )
+    .map(createComicCharacterMarkUp)
     .join('');
 
   const murkUp = `<div class="comics_images_box">
