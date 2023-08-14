@@ -13,7 +13,7 @@
   justify-content: space-between;
 }
 
-.search_form {
+.search-form {
   display: flex;
   flex-direction: row-reverse;
   gap: 8px;
@@ -30,7 +30,7 @@
   }
 }
 
-.search_input {
+.search-form_input {
   text-align: center;
   border: none;
   outline: none;
@@ -52,6 +52,6 @@
   }
 }
 
-.search-btn {
+.search-form_btn {
   background-color: inherit;
 }

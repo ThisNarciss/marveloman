@@ -4,8 +4,10 @@ import { dropdownMarkUp } from './dropdown-mark-up';
 import { createComicsMurkUp } from './comics-mark-up';
 import { pagination } from './pagination';
 
-const searchInput = document.querySelector('.search_input') as HTMLInputElement;
-const searchForm = document.querySelector('.search_form') as HTMLFormElement;
+const searchInput = document.querySelector(
+  '.search-form_input'
+) as HTMLInputElement;
+const searchForm = document.querySelector('.search-form') as HTMLFormElement;
 
 searchInput.addEventListener('input', handleSearch);
 searchForm.addEventListener('submit', handleSubmit);
