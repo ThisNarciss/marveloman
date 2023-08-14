@@ -7,9 +7,9 @@ let scrollPosition = 0;
 window.addEventListener('scroll', throttle(scrollPage, 1000));
 
 function scrollPage() {
-  header.style.backgroundColor = 'rgb(12, 11, 11)';
+  header.style.backgroundColor = 'var(--second-bg-color)';
   scrollPosition = window.scrollY;
   if (!scrollPosition) {
-    header.style.backgroundColor = 'rgba(12, 11, 11, 0)';
+    header.style.backgroundColor = 'transparent';
   }
 }
